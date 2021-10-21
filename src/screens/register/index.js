@@ -1,8 +1,30 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View, KeyboardAvoidingView, TextInput, TouchableOpacity, Button} from 'react-native';
+import { useEffect, useState } from "react";
+import api from '../../services/api';
+
 
 export function Register({ navigation }) {
+  const [name, setName] = useState('');
+  const [cpf, setCpf] = useState('');
+  const [phone, setPhone] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  async function handleSubmit(){
+    const data ={
+      CLI_NAME:name,
+      CLI_CPF:cpf,
+      CLI_EMAIL:email,
+      CLI_PASSWORD:password
+      }
+      const response = await api.post('/client/create', data);
+
+      if(response.status==400){
+        alert("deu errado");
+      }
+    }
+
   return (
     <KeyboardAvoidingView style={styles.background}>
       <View style={styles.container}>
@@ -10,41 +32,47 @@ export function Register({ navigation }) {
         style={styles.input}
         placeholder="Nome completo"
         autoCorrect={false}
-        onChangeText={()=> {}}
+        value={name}
+        onChange={e => setName(e.target.value)}
         />
 
         <TextInput
         style={styles.input}
         placeholder="CPF"
         autoCorrect={false}
-        onChangeText={()=> {}}
+        value={cpf}
+        onChange={e => setName(e.target.value)}
         />
 
         <TextInput
         style={styles.input}
         placeholder="Telefone"
         autoCorrect={false}
-        onChangeText={()=> {}}
+        value={phone}
+        onChange={e => setName(e.target.value)}
         />
 
         <TextInput
         style={styles.input}
         placeholder="E-mail"
         autoCorrect={false}
-        onChangeText={()=> {}}
+        value={email}
+        onChange={e => setName(e.target.value)}
         />
 
          <TextInput
         style={styles.input}
         placeholder="Senha"
         autoCorrect={false}
-        onChangeText={()=> {}}
+        value={password}
+        onChange={e => setName(e.target.value)}
         />
 
-
-        <TouchableOpacity style={styles.btnSubmit}>
-          <Text style={styles.submitText}>Cadatrar</Text>
-        </TouchableOpacity>
+        <Button
+        style={styles.btnRegister}
+        title="Cadastrar"
+        onPress={handleSubmit}
+        />
 
         <Button
         style={styles.btnRegister}

@@ -1,49 +1,52 @@
 import React from 'react';
 import { ScrollView, StyleSheet, Text, View, KeyboardAvoidingView, TextInput, TouchableOpacity, Button} from 'react-native';
 
-export function RegisterItem({ navigation }) {
+export function RegisterItemFilters({ navigation }) {
   return (
     <ScrollView>
       <KeyboardAvoidingView style={styles.background}>
         <View style={styles.container}>
+          <Text style={styles.text} numberOfLines={5}>{"Preencha as informações que condizem com o seu produto"}</Text>
           <TextInput
           style={styles.input}
-          placeholder="imagem"
+          placeholder="Lado"
           autoCorrect={false}
           onChangeText={()=> {}}
           />
-
           <TextInput
           style={styles.input}
-          placeholder="Título"
+          placeholder="Peso que aguenta"
           autoCorrect={false}
           onChangeText={()=> {}}
           />
-
           <TextInput
           style={styles.input}
-          placeholder="Contato"
+          placeholder="Peso do produto"
           autoCorrect={false}
           onChangeText={()=> {}}
           />
-
           <TextInput
           style={styles.input}
-          placeholder="Valor"
+          placeholder="Material"
           autoCorrect={false}
           onChangeText={()=> {}}
           />
-
           <TextInput
           style={styles.input}
-          placeholder="Descrição"
+          placeholder="Faixa etária"
+          autoCorrect={false}
+          onChangeText={()=> {}}
+          />
+           <TextInput
+          style={styles.input}
+          placeholder="Categoria"
           autoCorrect={false}
           onChangeText={()=> {}}
           />
           <Button
           style={styles.btnRegister}
-          title="Constinuar"
-          onPress={ () => navigation.navigate('RegisterItemFilters')}
+          title="Cadastrar produto"
+          onPress={ () => navigation.navigate('Login')}
           />
         </View>
       </KeyboardAvoidingView>
