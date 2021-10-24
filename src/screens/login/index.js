@@ -1,9 +1,30 @@
 import React from 'react';
 import { StyleSheet, Text, View, KeyboardAvoidingView, TextInput, TouchableOpacity, Button} from 'react-native';
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useForm } from 'react-hook-form'
 import api from '../../services/api';
 
 export function Login({ navigation }) {
+  const { register, setValue, handleSubmit } = useForm()
+
+  useEffect(() => {
+    register('email')
+    register('password')
+  }, [register])
+
+  const onSubmit = (data) => {
+    data ={
+          CLI_EMAIL:data.email,
+          CLI_PASSWORD:data.password
+          }
+    api.post('/client/login', data)
+    .then(() => {
+      navigation.navigate('Home')
+    })
+    .catch((error) => {
+           console.log(error.message)
+         });
+  };
 
   return (
     <KeyboardAvoidingView style={styles.background}>
@@ -12,19 +33,21 @@ export function Login({ navigation }) {
         style={styles.input}
         placeholder="Email"
         autoCorrect={false}
-        onChangeText={()=> {}}
+        onChangeText={text => setValue('email', text)}
         />
 
         <TextInput
         style={styles.input}
         placeholder="Senha"
         autoCorrect={false}
-        onChangeText={()=> {}}
+        onChangeText={text => setValue('password', text)}
         />
 
-        <TouchableOpacity style={styles.btnSubmit}>
-          <Text style={styles.submitText}>Acessar</Text>
-        </TouchableOpacity>
+        <Button
+        style={styles.btnRegister}
+        title="Acessar"
+        onPress={handleSubmit(onSubmit)}
+        ></Button>
 
         <Button
         style={styles.btnRegister}
