@@ -1,29 +1,32 @@
 import React from 'react';
-import { StyleSheet, Text, View, KeyboardAvoidingView, TextInput, TouchableOpacity, Button} from 'react-native';
-import { useEffect, useState } from "react";
+import { StyleSheet, Text, View, KeyboardAvoidingView, TextInput, TouchableOpacity, Button, Alert} from 'react-native';
+import { useEffect } from "react";
+import { useForm } from 'react-hook-form'
 import api from '../../services/api';
 
 
 export function Register({ navigation }) {
-  const [name, setName] = useState('');
-  const [cpf, setCpf] = useState('');
-  const [phone, setPhone] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const { register, setValue, handleSubmit } = useForm()
 
-  async function handleSubmit(){
-    const data ={
-      CLI_NAME:name,
-      CLI_CPF:cpf,
-      CLI_EMAIL:email,
-      CLI_PASSWORD:password
-      }
-      const response = await api.post('/client/create', data);
+  useEffect(() => {
+    register('name')
+    register('cpf')
+    register('email')
+    register('password')
+  }, [register])
 
-      if(response.status==400){
-        alert("deu errado");
-      }
-    }
+  const onSubmit = (data) => {
+     data ={
+          CLI_NAME:data.name,
+          CLI_CPF:data.cpf,
+          CLI_EMAIL:data.email,
+          CLI_PASSWORD:data.password
+          }
+    api.post('/client/create', data)
+    .catch((error) => {
+           console.log(error.message)
+         });
+  };
 
   return (
     <KeyboardAvoidingView style={styles.background}>
@@ -32,51 +35,40 @@ export function Register({ navigation }) {
         style={styles.input}
         placeholder="Nome completo"
         autoCorrect={false}
-        value={name}
-        onChange={e => setName(e.target.value)}
+        onChangeText={text => setValue('name', text)}
         />
 
         <TextInput
         style={styles.input}
         placeholder="CPF"
         autoCorrect={false}
-        value={cpf}
-        onChange={e => setName(e.target.value)}
-        />
-
-        <TextInput
-        style={styles.input}
-        placeholder="Telefone"
-        autoCorrect={false}
-        value={phone}
-        onChange={e => setName(e.target.value)}
+        onChangeText={text => setValue('cpf', text)}
         />
 
         <TextInput
         style={styles.input}
         placeholder="E-mail"
         autoCorrect={false}
-        value={email}
-        onChange={e => setName(e.target.value)}
+        onChangeText={text => setValue('email', text)}
         />
 
          <TextInput
         style={styles.input}
         placeholder="Senha"
         autoCorrect={false}
-        value={password}
-        onChange={e => setName(e.target.value)}
+        onChangeText={text => setValue('password', text)}
         />
 
         <Button
         style={styles.btnRegister}
         title="Cadastrar"
-        onPress={handleSubmit}
-        />
+        onPress={handleSubmit(onSubmit)}
+        ></Button>
 
         <Button
         style={styles.btnRegister}
         title="Já possui cadastro?"
+        variant="contained"
         onPress={ () => navigation.navigate('Login')}
         />
       </View>
