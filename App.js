@@ -20,7 +20,6 @@ function Tabs() {
       <Tab.Screen name="Home" component={Home}/>
       <Tab.Screen name="Login" component={Login}/>
       <Tab.Screen name="Cadastro de produto" component={RegisterItem}/>
-      <Tab.Screen name="Filtros do produto" component={RegisterItemFilters}/>
     </Tab.Navigator>
   );
 }
@@ -44,7 +43,7 @@ export default function App() {
         <Stack.Screen name='Login' component={Login} />
         <Stack.Screen name='Register' component={Register} />
         <Tab.Screen name="RegisterItem" component={RegisterItem}/>
-        <Tab.Screen name="RegisterItemFilters," component={RegisterItemFilters}/>
+        <Tab.Screen name="RegisterItemFilters" component={RegisterItemFilters}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

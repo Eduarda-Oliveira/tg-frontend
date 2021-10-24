@@ -5,7 +5,6 @@ import api from '../../services/api';
 
 export function Login({ navigation }) {
 
-
   return (
     <KeyboardAvoidingView style={styles.background}>
       <View style={styles.container}>
