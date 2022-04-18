@@ -4,25 +4,49 @@ import { Home } from './src/screens/home';
 import { Register } from './src/screens/register';
 import { RegisterItem } from './src/screens/registerItem';
 import { RegisterItemFilters } from './src/screens/registerItemFilters';
-import { Search } from './src/screens/search';
-import api from './src/services/api';
-
+import { Maps } from './src/screens/mapa';
+import Icon from 'react-native-vector-icons/Feather';
+import { StyleSheet } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 const Stack = createStackNavigator();
-const Tab = createBottomTabNavigator();
+const tab = createBottomTabNavigator();
+
+const screenOptions = (route, color) => {
+  let iconName;
+  switch (route.name) {
+    case 'Home':
+      iconName = 'home';
+      break;
+    case 'Login':
+      iconName = 'users';
+      break;
+    case 'Cadastro de produto':
+      iconName = 'edit';
+      break;
+    default:
+      break;
+  }
+
+  return <Icon name={iconName} color={color} size={28} />;
+};
 
 function Tabs() {
   return (
-    <Tab.Navigator>
-      <Tab.Screen name="Home" component={Home}/>
-      <Tab.Screen name="Login" component={Login}/>
-      <Tab.Screen name="Cadastro de produto" component={RegisterItem}/>
-    </Tab.Navigator>
+    <tab.Navigator
+      screenOptions={({route}) => ({
+        tabBarIcon: ({color}) => screenOptions(route, color),
+      })}>
+      <tab.Screen name="Home" component={Home}/>
+      <tab.Screen name="Login" component={Login}/>
+      <tab.Screen name="Cadastro de produto" component={RegisterItem}/>
+      <tab.Screen name="Mapa" component={Maps}/>
+    </tab.Navigator>
   );
 }
+
 
 export default function App() {
   
@@ -31,19 +55,20 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
       <Stack.Screen 
-      name='Home'
+      name='App'
       component={Tabs}
       options={{
-        title: 'Bem-vindo',
         headerStyle: {
           backgroundColor: '#121212'
         },
-        headerTintColor: '#fff'
-      }} />
+        headerTintColor: '#121212'
+      }} 
+      />
         <Stack.Screen name='Login' component={Login} />
         <Stack.Screen name='Register' component={Register} />
-        <Tab.Screen name="RegisterItem" component={RegisterItem}/>
-        <Tab.Screen name="RegisterItemFilters" component={RegisterItemFilters}/>
+        <tab.Screen name="RegisterItem" component={RegisterItem}/>
+        <tab.Screen name="RegisterItemFilters" component={RegisterItemFilters}/>
+        <tab.Screen name="Mapa" component={Maps}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

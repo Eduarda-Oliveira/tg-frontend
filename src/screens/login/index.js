@@ -1,7 +1,8 @@
 import React from 'react';
-import { StyleSheet, Text, View, KeyboardAvoidingView, TextInput, TouchableOpacity, Button} from 'react-native';
+import { StyleSheet, Text, View, KeyboardAvoidingView, TextInput, TouchableOpacity} from 'react-native';
 import { useEffect } from "react";
 import { useForm } from 'react-hook-form'
+import { Button } from 'react-native-elements';
 import api from '../../services/api';
 
 export function Login({ navigation }) {
@@ -37,6 +38,7 @@ export function Login({ navigation }) {
         />
 
         <TextInput
+        secureTextEntry
         style={styles.input}
         placeholder="Senha"
         autoCorrect={false}
@@ -50,9 +52,10 @@ export function Login({ navigation }) {
         ></Button>
 
         <Button
-        style={styles.btnRegister}
+        //style={styles.btnRegister}
         title="Criar conta"
         onPress={ () => navigation.navigate('Register')}
+        type="clear"
         />
       </View>
     </KeyboardAvoidingView>

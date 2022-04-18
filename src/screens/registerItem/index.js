@@ -1,6 +1,7 @@
 import React from 'react';
-import { ScrollView, StyleSheet, Text, View, KeyboardAvoidingView, TextInput, TouchableOpacity, Button} from 'react-native';
+import { ScrollView, StyleSheet, Text, View, KeyboardAvoidingView, TextInput, TouchableOpacity} from 'react-native';
 import api from '../../services/api';
+import { Button } from 'react-native-elements';
 
 import { useForm } from 'react-hook-form'
 import { useEffect, useState } from "react";
@@ -37,6 +38,9 @@ export function RegisterItem({ navigation }) {
       ITE_MATERIAL:data.material
           }
     api.post('/item/create', data)
+    .then(() => {
+      navigation.navigate('Home')
+    })
     .catch((error) => {
            console.log(error.message)
          });

@@ -1,6 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View, KeyboardAvoidingView, TextInput, TouchableOpacity, Button, Alert} from 'react-native';
+import { StyleSheet, Text, View, KeyboardAvoidingView, TextInput, TouchableOpacity, Alert} from 'react-native';
 import { useEffect } from "react";
+import { Button } from 'react-native-elements';
 import { useForm } from 'react-hook-form'
 import api from '../../services/api';
 
@@ -23,6 +24,9 @@ export function Register({ navigation }) {
           CLI_PASSWORD:data.password
           }
     api.post('/client/create', data)
+    .then(() => {
+      navigation.navigate('Home')
+    })
     .catch((error) => {
            console.log(error.message)
          });
@@ -70,6 +74,7 @@ export function Register({ navigation }) {
         title="Já possui cadastro?"
         variant="contained"
         onPress={ () => navigation.navigate('Login')}
+        type="clear"
         />
       </View>
     </KeyboardAvoidingView>

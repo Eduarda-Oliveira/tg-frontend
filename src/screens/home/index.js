@@ -19,9 +19,9 @@ export function Home() {
  })
   return(
     <View className="Items">
-      <div> {
+      <Text> {
       items?.map((item, index) => <li key={index}>{item.ITE_TITLE} {item.ITE_DESCRIPTION} {item.ITE_PRICE}</li>)
-      } </div>
+      } </Text>
     </View>
   )
 }
