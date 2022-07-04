@@ -6,6 +6,8 @@ import MapView from 'react-native-web-maps'
 export function Maps() {
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
+  const [latitude, setLatitude] = useState(null);
+  const [longitude, setLongitude] = useState(null);
 
   useEffect(() => {
     (async () => {
@@ -16,7 +18,10 @@ export function Maps() {
       }
 
       let location = await Location.getCurrentPositionAsync({});
-      setLocation(location);
+      setLatitude(location.coords.latitude);
+      setLongitude(location.coords.longitude);
+      setLocation(location.coords);
+
     })();
   }, []);
 
@@ -26,10 +31,14 @@ export function Maps() {
   } else if (location) {
     text = JSON.stringify(location);
   }
+  console.warn("latitude: ", latitude);
+  console.warn("logitude: ", longitude);
+
 
   return (
     <View style={styles.container}>
-      <Text style={styles.paragraph}>{text}</Text>
+      <Text style={styles.paragraph}>{latitude}</Text>
+      <Text style={styles.paragraph}>{longitude}</Text>
     </View>
   );
 }
