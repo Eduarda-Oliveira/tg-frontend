@@ -4,7 +4,8 @@ import { Home } from './src/screens/home';
 import { Register } from './src/screens/register';
 import { RegisterItem } from './src/screens/registerItem';
 import { RegisterItemFilters } from './src/screens/registerItemFilters';
-import { Maps } from './src/screens/mapa';
+import { Maps } from './src/screens/mapa/index';
+import { Mapinha } from './src/screens/mapa/mapinha';
 import Icon from 'react-native-vector-icons/Feather';
 import { StyleSheet } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -39,10 +40,12 @@ function Tabs() {
       screenOptions={({route}) => ({
         tabBarIcon: ({color}) => screenOptions(route, color),
       })}>
-      <tab.Screen name="Home" component={Home}/>
-      <tab.Screen name="Login" component={Login}/>
-      <tab.Screen name="Cadastro de produto" component={RegisterItem}/>
-      <tab.Screen name="Mapa" component={Maps}/>
+      <tab.Screen name="Home" component={Home} options={{header: () => null}}/>
+      <tab.Screen name="Login" component={Login} options={{header: () => null}}/>
+      <tab.Screen name="Cadastro de produto" component={RegisterItem} options={{header: () => null}}/>
+      <tab.Screen name="Mapa" component={Maps} options={{header: () => null}}/>
+      <tab.Screen name="Mapinha" component={Mapinha} options={{header: () => null}}/>
+
     </tab.Navigator>
   );
 }
@@ -53,22 +56,36 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
+      <Stack.Navigator initialRouteName="Home" independent={true}>
       <Stack.Screen 
       name='App'
       component={Tabs}
-      options={{
-        headerStyle: {
-          backgroundColor: '#121212'
-        },
-        headerTintColor: '#121212'
-      }} 
+      options={{header: () => null}}
       />
-        <Stack.Screen name='Login' component={Login} />
-        <Stack.Screen name='Register' component={Register} />
-        <tab.Screen name="RegisterItem" component={RegisterItem}/>
-        <tab.Screen name="RegisterItemFilters" component={RegisterItemFilters}/>
-        <tab.Screen name="Mapa" component={Maps}/>
+        <Stack.Screen 
+        name='Login' 
+        component={Login} 
+        options={{header: () => null}}/>
+        <Stack.Screen 
+        name='Register' 
+        component={Register}
+        options={{header: () => null}} />
+        <tab.Screen 
+        name="RegisterItem" 
+        component={RegisterItem} 
+        options={{header: () => null}}/>
+        <tab.Screen 
+        name="RegisterItemFilters" 
+        component={RegisterItemFilters}
+        options={{header: () => null}}/>
+        <tab.Screen 
+        name="Mapa" 
+        component={Maps}
+        options={{header: () => null}}/>
+        <tab.Screen 
+        name="Mapinha" 
+        component={Mapinha}
+        options={{header: () => null}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

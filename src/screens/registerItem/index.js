@@ -1,14 +1,19 @@
 import React from 'react';
-import { ScrollView, StyleSheet, Text, View, KeyboardAvoidingView, TextInput, TouchableOpacity} from 'react-native';
+import { ScrollView, StyleSheet, Text, View, KeyboardAvoidingView, TextInput, TouchableOpacity, Picker} from 'react-native';
 import api from '../../services/api';
 import { Button } from 'react-native-elements';
-
+import RNPickerSelect from 'react-native-picker-select';
 import { useForm } from 'react-hook-form'
 import { useEffect, useState } from "react";
 
 export function RegisterItem({ navigation }) {
   const { register, setValue, handleSubmit } = useForm()
+  const [categories, setCategories] = useState([]);
+  const [selectedCategory, setSelectedCategories] = useState("");
 
+  useEffect (() => {
+    console.log(selectedCategory);
+  }, [selectedCategory])
   useEffect(() => {
     register('title')
     register('price')
@@ -23,21 +28,30 @@ export function RegisterItem({ navigation }) {
 
   }, [register])
 
+  useEffect(() => {
+    api.get(
+      "/Category/list"
+    ).then(({data}) => {
+      setCategories(data.categories)
+    }).catch((error) => {
+      console.log(error.message)
+    });
+  })
   const onSubmit = (data) => {
-     data ={
+     req_data ={
       CLI_ID: 1,
       ITE_TITLE:data.title,
       ITE_PRICE:data.price,
       ITE_DESCRIPTION:data.description,
       ITE_IMAGE:data.image,
       ITE_CONTACT:data.contact,
-      ITE_CATEGORY:data.category,
+      CAT_ID: selectedCategory,
       ITE_SIDE:data.side,
       ITE_WEIGHT_CAPECITY:data.weight_capacity,
       ITE_WEIGHT:data.weight,
       ITE_MATERIAL:data.material
           }
-    api.post('/item/create', data)
+    api.post('/item/create', req_data)
     .then(() => {
       navigation.navigate('Home')
     })
@@ -45,6 +59,7 @@ export function RegisterItem({ navigation }) {
            console.log(error.message)
          });
   };
+
   return (
     <ScrollView>
       <KeyboardAvoidingView style={styles.background}>
@@ -89,6 +104,14 @@ export function RegisterItem({ navigation }) {
           autoCorrect={false}
           onChangeText={text => setValue('category', text)}
           />
+
+        <Picker
+          selectedValue={selectedCategory}
+          onValueChange={(itemValue, itemIndex) => setSelectedCategories( itemValue)} >
+          {categories.map((item, key)=>(
+            <Picker.Item label={item.CAT_NAME} value={item.CAT_ID} key={key} />)
+            )}
+        </Picker>
           <TextInput
           style={styles.input}
           placeholder="Lado"
