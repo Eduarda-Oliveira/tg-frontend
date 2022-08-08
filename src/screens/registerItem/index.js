@@ -5,11 +5,14 @@ import { Button } from 'react-native-elements';
 import RNPickerSelect from 'react-native-picker-select';
 import { useForm } from 'react-hook-form'
 import { useEffect, useState } from "react";
+import * as ImagePicker from 'expo-image-picker';
+
 
 export function RegisterItem({ navigation }) {
   const { register, setValue, handleSubmit } = useForm()
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategories] = useState("");
+  const [image, setImage] = React.useState(null);
 
   useEffect (() => {
     console.log(selectedCategory);
@@ -21,55 +24,63 @@ export function RegisterItem({ navigation }) {
     register('image')
     register('contact')
     register('category')
-    register('side')
-    register('weight_capacity')
-    register('weight')
-    register('material')
-
+    register('image')
   }, [register])
 
   useEffect(() => {
     api.get(
-      "/Category/list"
+      "/category/list"
     ).then(({data}) => {
       setCategories(data.categories)
     }).catch((error) => {
       console.log(error.message)
     });
-  })
+  }, [categories])
+
   const onSubmit = (data) => {
-     req_data ={
+     data ={
       CLI_ID: 1,
       ITE_TITLE:data.title,
       ITE_PRICE:data.price,
       ITE_DESCRIPTION:data.description,
-      ITE_IMAGE:data.image,
+      ITE_IMAGE: image,
       ITE_CONTACT:data.contact,
       CAT_ID: selectedCategory,
-      ITE_SIDE:data.side,
-      ITE_WEIGHT_CAPECITY:data.weight_capacity,
-      ITE_WEIGHT:data.weight,
-      ITE_MATERIAL:data.material
           }
-    api.post('/item/create', req_data)
+    api.post('/item/create', data)
     .then(() => {
       navigation.navigate('Home')
     })
     .catch((error) => {
            console.log(error.message)
+           console.log(data)
          });
   };
 
+  let openImagePickerAsync = async () => {
+    let permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+
+    if (permissionResult.granted === false) {
+      alert('Permission to access camera roll is required!');
+      return;
+    }
+
+    let result = await ImagePicker.launchImageLibraryAsync({
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    if (result.cancelled === true) {
+      return;
+    }
+    setImage(result.uri);
+    console.log(result.uri)
+  };
+
   return (
-    <ScrollView>
       <KeyboardAvoidingView style={styles.background}>
         <View style={styles.container}>
-          <TextInput
-          style={styles.input}
-          placeholder="imagem"
-          autoCorrect={false}
-          onChangeText={text => setValue('image', text)}
-          />
 
           <TextInput
           style={styles.input}
@@ -98,12 +109,7 @@ export function RegisterItem({ navigation }) {
           autoCorrect={false}
           onChangeText={text => setValue('description', text)}
           />
-          <TextInput
-          style={styles.input}
-          placeholder="Catedoria"
-          autoCorrect={false}
-          onChangeText={text => setValue('category', text)}
-          />
+
 
         <Picker
           selectedValue={selectedCategory}
@@ -112,36 +118,11 @@ export function RegisterItem({ navigation }) {
             <Picker.Item label={item.CAT_NAME} value={item.CAT_ID} key={key} />)
             )}
         </Picker>
-          <TextInput
-          style={styles.input}
-          placeholder="Lado"
-          autoCorrect={false}
-          onChangeText={text => setValue('size', text)}
-          />
-          <TextInput
-          style={styles.input}
-          placeholder="Peso que aguenta"
-          autoCorrect={false}
-          onChangeText={text => setValue('weight_capacity', text)}
-          />
-          <TextInput
-          style={styles.input}
-          placeholder="Peso do produto"
-          autoCorrect={false}
-          onChangeText={text => setValue('weight', text)}
-          />
-          <TextInput
-          style={styles.input}
-          placeholder="Material"
-          autoCorrect={false}
-          onChangeText={text => setValue('material', text)}
-          />
-          <TextInput
-          style={styles.input}
-          placeholder="Faixa etária"
-          autoCorrect={false}
-          onChangeText={text => setValue('name', text)}
-          />
+
+        <TouchableOpacity onPress={openImagePickerAsync} style={styles.btnRegister} >
+          <Text style={styles.buttonText}>Pick a photo</Text>
+        </TouchableOpacity>
+
           <Button
           style={styles.btnRegister}
           title="Cadastrar produto"
@@ -149,7 +130,6 @@ export function RegisterItem({ navigation }) {
           />
         </View>
       </KeyboardAvoidingView>
-    </ScrollView>
   );
 }
 
