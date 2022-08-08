@@ -1,7 +1,8 @@
 import React from 'react';
-import {View, Text, Image, StyleSheet, ScrollView, KeyboardAvoidingView} from "react-native";
+import {Image, View, Text, StyleSheet, ScrollView, KeyboardAvoidingView} from "react-native";
 import { useEffect, useState } from "react";
 import api from '../../services/api';
+import { withTheme } from 'react-native-elements';
 
 export function Home() {
  const [items, setItems] = useState([]);
@@ -18,8 +19,8 @@ export function Home() {
    });
  })
   return(
-    <ScrollView>
-      <KeyboardAvoidingView style={styles.background}>
+    <KeyboardAvoidingView style={styles.background}>
+      <ScrollView>
         <View style={styles.container} className="Items">
           {
               items.map((item, index) =>{
@@ -27,24 +28,25 @@ export function Home() {
                   <Text 
                   style={styles.listText}
                   key={index}>
-                  {item.ITE_TITLE} {item.ITE_DESCRIPTION} {item.ITE_PRICE}
+                  {item.ITE_TITLE} {item.ITE_DESCRIPTION} {item.ITE_PRICE} 
+                  <Image source={{ uri: item.ITE_IMAGE }} style={styles.thumbnail} />
                   </Text>
                 )
               })
             }
         </View>
-      </KeyboardAvoidingView>
-    </ScrollView>
+      </ScrollView>
+    </KeyboardAvoidingView>
+
   )
 }
 
 const styles = StyleSheet.create({
   background: {
-    position: 'absolute',
-    left: 0,
-    right: -50,
-    top: 0,
-    height: '100%',
+    flex: 1,
+    backgroundColor: '#191919',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 
   container:{
@@ -55,7 +57,15 @@ const styles = StyleSheet.create({
   },
 
   listText: {
-    fontSize: 200,
+    fontSize: 20,
     textAlign: 'center',
-  }
+    color: 'white',
+    fontWeight: 'bold'
+  },
+
+  thumbnail: {
+    width: 300,
+    height: 150,
+    resizeMode: 'contain',
+  },
 });
