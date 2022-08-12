@@ -110,6 +110,11 @@ export function RegisterItem({ navigation }) {
           onChangeText={text => setValue('description', text)}
           />
 
+        <TouchableOpacity 
+          onPress={openImagePickerAsync} 
+          style={styles.button} >
+          <Text style={styles.buttonText}>Selecione uma Imagem</Text>
+        </TouchableOpacity>
 
         <Picker
           selectedValue={selectedCategory}
@@ -119,15 +124,14 @@ export function RegisterItem({ navigation }) {
             )}
         </Picker>
 
-        <TouchableOpacity onPress={openImagePickerAsync} style={styles.btnRegister} >
-          <Text style={styles.buttonText}>Pick a photo</Text>
-        </TouchableOpacity>
+        
 
-          <Button
-          style={styles.btnRegister}
-          title="Cadastrar produto"
-          onPress={handleSubmit(onSubmit)}
-          />
+          <TouchableOpacity
+            style={styles.btnRegister}
+            onPress={handleSubmit(onSubmit)}>
+            <Text style={styles.registerText}>Cadastrar</Text>
+          </TouchableOpacity>
+
         </View>
       </KeyboardAvoidingView>
   );
@@ -140,7 +144,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-
   container:{
     flex:1,
     alignItems: 'center',
@@ -156,27 +159,26 @@ const styles = StyleSheet.create({
     borderRadius: 7,
     padding: 10,
   },
-
-  btnSubmit:{
+  btnRegister:{
     backgroundColor: '#35AAFF',
-    width: '90%',
+    width: '40%',
     height:45,
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 7,
   },
-  submitText:{
-    fontSize:18,
-    color: '#FFF',
+  button: {
+    backgroundColor: "white",
+    padding: 7,
+    width: '90%',
+    height:40,
+    borderRadius: 7,
   },
-  text:{
+  buttonText:{
     fontSize:18,
-    color: '#FFF',
-  },
-  btnRegister:{
-    marginTop: 10,
   },
   registerText:{
     color: '#FFF',
+    fontSize:18,
   },
 });
