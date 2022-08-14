@@ -1,44 +1,82 @@
 import React from 'react';
-import {Image, View, Text, StyleSheet, ScrollView, KeyboardAvoidingView} from "react-native";
+import { Image, ScrollView, StyleSheet, Text, View, KeyboardAvoidingView, TextInput, TouchableOpacity, Picker} from 'react-native';
 import { useEffect, useState } from "react";
 import api from '../../services/api';
-import { withTheme } from 'react-native-elements';
+import RNPickerSelect from 'react-native-picker-select';
+import { useForm } from 'react-hook-form'
+import { Button } from 'react-native-elements';
 
-export function Home() {
- const [items, setItems] = useState([]);
- useEffect(() => {
-   api.get(
-     "/item/list"
-   ).then(({data}) => {
-     setItems(data.items)
-     //console.log(data["items"])
-     //setItems(data.items);
-     //console.log(data)
-   }).catch((error) => {
-     console.log(error.message)
-   });
+export function Home({ navigation }) {
+  const { register, setValue, handleSubmit } = useForm()
+  const [selectedCategory, setSelectedCategories] = useState("");
+  const [categories, setCategories] = useState([]);
+  const [items, setItems] = useState([]);
+
+
+  useEffect(() => {
+    api.get(
+      "/category/list"
+    ).then(({data}) => {
+      setCategories(data.categories)
+    }).catch((error) => {
+      console.log(error.message)
+    });
+  }, [categories])
+
+  useEffect(() => { 
+    api.get('/item/listCategory', {
+      params: {
+        "CAT_ID": "2"
+      }
+      })
+   .then(({data}) => {
+    setItems(data.items) 
+    console.log(data)
+    })
+   .catch((error) => {
+          console.log(error.message)
+        });
  })
-  return(
+
+  return (
     <KeyboardAvoidingView style={styles.background}>
       <ScrollView>
-        <View style={styles.container} className="Items">
+        <View style={styles.container}>
+          <Picker
+            selectedValue={selectedCategory}
+            onValueChange={(itemValue, itemIndex) => setSelectedCategories( itemValue)} >
+            {categories.map((item, key)=>(
+              <Picker.Item label={item.CAT_NAME} value={item.CAT_ID} key={key} />)
+              )}
+          </Picker>
           {
-              items.map((item, index) =>{
-                return(
-                  <Text 
+            items.map((item, index) =>{
+              return(
+                <Text 
                   style={styles.listText}
                   key={index}>
                   {item.ITE_TITLE} {item.ITE_DESCRIPTION} {item.ITE_PRICE} 
                   <Image source={{ uri: item.ITE_IMAGE }} style={styles.thumbnail} />
-                  </Text>
-                )
-              })
-            }
+                </Text>
+              )
+            })
+          }
+          <TouchableOpacity
+            style={styles.btnRegister}
+            //</View>onPress={handleSubmit(onSubmit)}
+            >
+            <Text style={styles.registerText}>Buscar</Text>
+          </TouchableOpacity>
+          <Button
+            //style={styles.btnRegister}
+            title="tudo"
+            onPress={ () => navigation.navigate('Category')}
+            type="clear"
+          />
         </View>
       </ScrollView>
     </KeyboardAvoidingView>
-
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -56,16 +94,10 @@ const styles = StyleSheet.create({
     width: '90%',
   },
 
-  listText: {
-    fontSize: 20,
-    textAlign: 'center',
-    color: 'white',
-    fontWeight: 'bold'
-  },
-
   thumbnail: {
     width: 300,
     height: 150,
     resizeMode: 'contain',
   },
+  
 });

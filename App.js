@@ -1,4 +1,5 @@
 import React from 'react';
+import { Category } from './src/screens/category';
 import { Login } from './src/screens/login';
 import { Home } from './src/screens/home';
 import { Register } from './src/screens/register';
@@ -69,6 +70,10 @@ export default function App() {
         <Stack.Screen 
         name='Register' 
         component={Register}
+        options={{header: () => null}} />
+        <Stack.Screen 
+        name='Category' 
+        component={Category}
         options={{header: () => null}} />
         <tab.Screen 
         name="RegisterItem" 
