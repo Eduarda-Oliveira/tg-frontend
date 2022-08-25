@@ -17,6 +17,7 @@ export function RegisterItem({ navigation }) {
   useEffect (() => {
     console.log(selectedCategory);
   }, [selectedCategory])
+  
   useEffect(() => {
     register('title')
     register('price')
@@ -35,7 +36,7 @@ export function RegisterItem({ navigation }) {
     }).catch((error) => {
       console.log(error.message)
     });
-  }, [categories])
+  }, [])
 
   const onSubmit = (data) => {
      data ={

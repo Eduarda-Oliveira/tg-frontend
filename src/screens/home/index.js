@@ -21,14 +21,14 @@ export function Home({ navigation }) {
     }).catch((error) => {
       console.log(error.message)
     });
-  }, [categories])
+  }, [])
 
-  useEffect(() => { 
-    api.get('/item/listCategory', {
-      params: {
-        "CAT_ID": "2"
-      }
-      })
+  const onSubmit = () => {
+    let params ={
+      CAT_ID: selectedCategory,
+          }
+    console.log(params)
+    api.get('/item/listCategory', {params:params})
    .then(({data}) => {
     setItems(data.items) 
     console.log(data)
@@ -36,7 +36,7 @@ export function Home({ navigation }) {
    .catch((error) => {
           console.log(error.message)
         });
- })
+};
 
   return (
     <KeyboardAvoidingView style={styles.background}>
@@ -63,7 +63,7 @@ export function Home({ navigation }) {
           }
           <TouchableOpacity
             style={styles.btnRegister}
-            //</View>onPress={handleSubmit(onSubmit)}
+            onPress={handleSubmit(onSubmit)}
             >
             <Text style={styles.registerText}>Buscar</Text>
           </TouchableOpacity>
@@ -100,4 +100,12 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   
+  btnRegister:{
+    backgroundColor: '#35AAFF',
+    width: '40%',
+    height:45,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 7,
+  },
 });
