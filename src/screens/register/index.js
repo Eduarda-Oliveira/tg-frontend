@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, KeyboardAvoidingView, TextInput, TouchableOpacity, Alert} from 'react-native';
+import { Image, StyleSheet, Text, View, KeyboardAvoidingView, TextInput, TouchableOpacity, Alert} from 'react-native';
 import { useEffect } from "react";
 import { Button } from 'react-native-elements';
 import { useForm } from 'react-hook-form'
@@ -35,6 +35,10 @@ export function Register({ navigation }) {
   return (
     <KeyboardAvoidingView style={styles.background}>
       <View style={styles.container}>
+      <Image
+          style={styles.logo}
+          source={require("../../../assets/LOGOtg.png")}
+        />  
         <TextInput
         style={styles.input}
         placeholder="Nome completo"
@@ -62,20 +66,16 @@ export function Register({ navigation }) {
         autoCorrect={false}
         onChangeText={text => setValue('password', text)}
         />
-
-        <Button
-        style={styles.btnRegister}
-        title="Cadastrar"
-        onPress={handleSubmit(onSubmit)}
-        ></Button>
-
-        <Button
-        style={styles.btnRegister}
-        title="Já possui cadastro?"
-        variant="contained"
-        onPress={ () => navigation.navigate('Login')}
-        type="clear"
-        />
+        <TouchableOpacity
+          style={styles.btnSubmit}
+          onPress={handleSubmit(onSubmit)}>
+          <Text style={styles.submitText}>Cadastrar</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.btnRegister}
+          onPress={ () => navigation.navigate('Login')}>
+          <Text style={styles.registerText}>Já possui cadastro?</Text>
+        </TouchableOpacity>
       </View>
     </KeyboardAvoidingView>
   );
@@ -84,11 +84,23 @@ export function Register({ navigation }) {
 const styles = StyleSheet.create({
   background: {
     flex: 1,
-    backgroundColor: '#191919',
+    backgroundColor: '#FFF7C0',
     alignItems: 'center',
     justifyContent: 'center',
   },
-
+  logo:{
+    resizeMode: "center",
+    height: 200,
+    width: 200
+  },
+  text:{
+    height: 90,
+    fontSize: 50,
+    fontWeight: "bold",
+    color: 'rgba(106, 61, 116, 1)',
+    textShadowColor: "grey",
+    textShadowRadius: 1,
+  },
   container:{
     flex:1,
     alignItems: 'center',
@@ -96,32 +108,39 @@ const styles = StyleSheet.create({
     width: '90%',
   },
   input: {
-    backgroundColor: '#FFF',
+    backgroundColor: 'rgba(103, 64, 119, 0.78)',
     width: '90%',
     marginBottom: 15,
     color: '#222',
     fontSize: 17,
-    borderRadius: 7,
+    fontWeight: 'bold',
+    placeholderTextColor: '#FFF7C0',
+    borderRadius:20,
     padding: 10,
   },
-
   btnSubmit:{
-    backgroundColor: '#35AAFF',
-    width: '90%',
+    backgroundColor: 'rgba(106, 61, 116, 1)',
+    width: '50%',
     height:45,
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 7,
+    borderRadius: 20,
+    elevation: 3,
   },
   submitText:{
-    fontSize:18,
-    color: '#FFF',
+    fontWeight: 'bold',
+    fontSize:20,
+    color: '#FFF7C0',
 
   },
   btnRegister:{
-    marginTop: 10,
+    //width: '50%',
+    //height:45,
+    //backgroundColor: 'rgba(106, 61, 116, 1)',
   },
   registerText:{
-    color: '#FFF',
-  },
+    fontWeight: 'bold',
+    fontSize:20,
+    color: 'rgba(106, 61, 116, 1)',
+    },
 });

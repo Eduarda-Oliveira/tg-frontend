@@ -1,14 +1,13 @@
 import React from 'react';
-import { Image, ScrollView, StyleSheet, Text, View, KeyboardAvoidingView, TextInput, TouchableOpacity, Picker} from 'react-native';
+import { Image, ScrollView, StyleSheet, Text, View, KeyboardAvoidingView, TouchableOpacity, Picker} from 'react-native';
 import { useEffect, useState } from "react";
 import api from '../../services/api';
 import RNPickerSelect from 'react-native-picker-select';
 import { useForm } from 'react-hook-form'
-import { Button } from 'react-native-elements';
 
 export function Home({ navigation }) {
   const { register, setValue, handleSubmit } = useForm()
-  const [selectedCategory, setSelectedCategories] = useState("");
+  const [selectedCategory, setSelectedCategories] = useState('Escolha uma categoria');
   const [categories, setCategories] = useState([]);
   const [items, setItems] = useState([]);
 
@@ -42,6 +41,10 @@ export function Home({ navigation }) {
     <KeyboardAvoidingView style={styles.background}>
       <ScrollView>
         <View style={styles.container}>
+        <Image
+          style={styles.logo}
+          source={require("../../../assets/LOGOtg.png")}
+        />  
           <Picker
             selectedValue={selectedCategory}
             onValueChange={(itemValue, itemIndex) => setSelectedCategories( itemValue)} >
@@ -67,12 +70,12 @@ export function Home({ navigation }) {
             >
             <Text style={styles.registerText}>Buscar</Text>
           </TouchableOpacity>
-          <Button
-            //style={styles.btnRegister}
-            title="tudo"
+          <TouchableOpacity
+            style={styles.btnSubmit}
             onPress={ () => navigation.navigate('Category')}
-            type="clear"
-          />
+            >
+            <Text style={styles.submitText}>Buscar todos</Text>
+          </TouchableOpacity>
         </View>
       </ScrollView>
     </KeyboardAvoidingView>
@@ -82,30 +85,56 @@ export function Home({ navigation }) {
 const styles = StyleSheet.create({
   background: {
     flex: 1,
-    backgroundColor: '#191919',
+    backgroundColor: '#FFF7C0',
     alignItems: 'center',
     justifyContent: 'center',
   },
-
   container:{
     flex:1,
     alignItems: 'center',
     justifyContent: 'center',
     width: '90%',
   },
-
+  logo:{
+    resizeMode: "center",
+    height: 200,
+    width: 200
+  },
   thumbnail: {
     width: 300,
     height: 150,
     resizeMode: 'contain',
   },
   
-  btnRegister:{
-    backgroundColor: '#35AAFF',
-    width: '40%',
+  btnSubmit:{
+    backgroundColor: 'rgba(106, 61, 116, 1)',
+    width: '90%',
     height:45,
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 7,
+    borderRadius: 20,
+    elevation: 3,
   },
+  submitText:{
+    fontWeight: 'bold',
+    fontSize:20,
+    color: '#FFF7C0',
+  },
+  btnRegister:{
+    //width: '100%',
+    //height:45,
+    //backgroundColor: 'rgba(106, 61, 116, 1)',
+  },
+  registerText:{
+    fontWeight: 'bold',
+    fontSize:20,
+    color: 'rgba(106, 61, 116, 1)',
+    },
+    listText: {
+      fontWeight: 'bold',
+      fontSize:20,
+      color: 'rgba(106, 61, 116, 1)',
+      textAlign: 'center',
+    },
+    
 });

@@ -44,7 +44,7 @@ export function Category() {
 const styles = StyleSheet.create({
   background: {
     flex: 1,
-    backgroundColor: '#191919',
+    backgroundColor: '#FFF7C0',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -57,10 +57,10 @@ const styles = StyleSheet.create({
   },
 
   listText: {
-    fontSize: 20,
+    fontWeight: 'bold',
+    fontSize:20,
+    color: 'rgba(106, 61, 116, 1)',
     textAlign: 'center',
-    color: 'white',
-    fontWeight: 'bold'
   },
 
   thumbnail: {

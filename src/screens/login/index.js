@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, View, KeyboardAvoidingView, TextInput, TouchableOpacity} from 'react-native';
+import { StyleSheet, Text, View, KeyboardAvoidingView, TextInput, TouchableOpacity, Image} from 'react-native';
+import Icon from 'react-native-vector-icons/Feather';
 import { useEffect } from "react";
 import { useForm } from 'react-hook-form'
 import { Button } from 'react-native-elements';
@@ -30,33 +31,38 @@ export function Login({ navigation }) {
   return (
     <KeyboardAvoidingView style={styles.background}>
       <View style={styles.container}>
+      <Image
+          style={styles.logo}
+          source={require("../../../assets/LOGOtg.png")}
+        />        
+        <Text style={styles.text}> Login </Text>
         <TextInput
         style={styles.input}
         placeholder="Email"
+        keyboardType="email-address"
         autoCorrect={false}
         onChangeText={text => setValue('email', text)}
-        />
+        />    
 
         <TextInput
         secureTextEntry
         style={styles.input}
+        icon="lock"
         placeholder="Senha"
         autoCorrect={false}
         onChangeText={text => setValue('password', text)}
         />
 
-        <Button
-        style={styles.btnRegister}
-        title="Acessar"
-        onPress={handleSubmit(onSubmit)}
-        ></Button>
+        <TouchableOpacity
+          style={styles.btnSubmit}
+          onPress={handleSubmit(onSubmit)}>
+          <Text style={styles.submitText}>Acessar</Text>
+        </TouchableOpacity>
 
-        <Button
-        //style={styles.btnRegister}
-        title="Criar conta"
-        onPress={ () => navigation.navigate('Register')}
-        type="clear"
-        />
+        <TouchableOpacity
+          onPress={ () => navigation.navigate('Register')}>
+          <Text style={styles.registerText}>Criar conta</Text>
+        </TouchableOpacity>
       </View>
     </KeyboardAvoidingView>
   );
@@ -65,11 +71,23 @@ export function Login({ navigation }) {
 const styles = StyleSheet.create({
   background: {
     flex: 1,
-    backgroundColor: '#191919',
+    backgroundColor: '#FFF7C0',
     alignItems: 'center',
     justifyContent: 'center',
   },
-
+  logo:{
+    resizeMode: "center",
+    height: 200,
+    width: 200
+  },
+  text:{
+    height: 90,
+    fontSize: 50,
+    fontWeight: "bold",
+    color: 'rgba(106, 61, 116, 1)',
+    textShadowColor: "grey",
+    textShadowRadius: 1,
+  },
   container:{
     flex:1,
     alignItems: 'center',
@@ -77,32 +95,40 @@ const styles = StyleSheet.create({
     width: '90%',
   },
   input: {
-    backgroundColor: '#FFF',
+    backgroundColor: 'rgba(103, 64, 119, 0.78)',
     width: '90%',
     marginBottom: 15,
     color: '#222',
     fontSize: 17,
-    borderRadius: 7,
+    fontWeight: 'bold',
+    placeholderTextColor: '#FFF7C0',
+    borderRadius:20,
     padding: 10,
   },
-
   btnSubmit:{
-    backgroundColor: '#35AAFF',
-    width: '90%',
+    backgroundColor: 'rgba(106, 61, 116, 1)',
+    width: '50%',
     height:45,
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 7,
+    borderRadius: 20,
+    elevation: 3,
   },
   submitText:{
-    fontSize:18,
-    color: '#FFF',
+    fontWeight: 'bold',
+    fontSize:20,
+    color: '#FFF7C0',
 
   },
   btnRegister:{
-    marginTop: 10,
+    width: '50%',
+    height:45,
+    backgroundColor: 'rgba(106, 61, 116, 1)',
   },
   registerText:{
-    color: '#FFF',
-  },
+    fontWeight: 'bold',
+    fontSize:20,
+    color: 'rgba(106, 61, 116, 1)',
+    },
+    
 });
