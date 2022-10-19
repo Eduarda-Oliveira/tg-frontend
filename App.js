@@ -12,9 +12,10 @@ import { StyleSheet } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { UpdateItem } from './src/screens/updateItem';
 
 const Stack = createStackNavigator();
-const tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator();
 
 const screenOptions = (route, color) => {
   let iconName;
@@ -35,63 +36,62 @@ const screenOptions = (route, color) => {
   return <Icon name={iconName} color={color} size={28} />;
 };
 
-function Tabs() {
+function HomeStackScreen() {
   return (
-    <tab.Navigator
-      screenOptions={({route}) => ({
-        tabBarIcon: ({color}) => screenOptions(route, color),
-      })}>
-      <tab.Screen name="Home" component={Home} options={{header: () => null}}/>
-      <tab.Screen name="Login" component={Login} options={{header: () => null}}/>
-      <tab.Screen name="Cadastro de produto" component={RegisterItem} options={{header: () => null}}/>
-      <tab.Screen name="Mapa" component={Maps} options={{header: () => null}}/>
-      <tab.Screen name="Mapinha" component={Mapinha} options={{header: () => null}}/>
-
-    </tab.Navigator>
+    <Stack.Navigator>
+      <Stack.Screen name="Home" component={Home} options={{header: () => null}}/>
+      <Stack.Screen name="Category" component={Category} options={{header: () => null}}/>
+    </Stack.Navigator>
   );
 }
 
+function LoginStackScreen() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Login" component={Login} options={{header: () => null}}/>
+      <Stack.Screen name="Register" component={Register} options={{header: () => null}}/>
+    </Stack.Navigator>
+  );
+}
 
 export default function App() {
   
-
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home" independent={true}>
-      <Stack.Screen 
-      name='App'
-      component={Tabs}
-      options={{header: () => null}}
-      />
-        <Stack.Screen 
+      <Tab.Navigator 
+        initialRouteName="Home" 
+        independent={true}
+        screenOptions={({route}) => ({
+        tabBarIcon: ({color}) => screenOptions(route, color),
+      })}>
+        <Tab.Screen 
+        name='Home' 
+        component={HomeStackScreen} 
+        options={{header: () => null}}
+        />
+        <Tab.Screen 
         name='Login' 
-        component={Login} 
-        options={{header: () => null}}/>
-        <Stack.Screen 
-        name='Register' 
-        component={Register}
-        options={{header: () => null}} />
-        <Stack.Screen 
-        name='Category' 
-        component={Category}
-        options={{header: () => null}} />
-        <tab.Screen 
-        name="RegisterItem" 
+        component={LoginStackScreen} 
+        options={{header: () => null}}
+        />
+        <Tab.Screen 
+        name='Update' 
+        component={UpdateItem} 
+        options={{header: () => null}}
+        />
+        <Tab.Screen 
+        name="Register Item" 
         component={RegisterItem} 
         options={{header: () => null}}/>
-        <tab.Screen 
-        name="RegisterItemFilters" 
-        component={RegisterItemFilters}
-        options={{header: () => null}}/>
-        <tab.Screen 
+        <Tab.Screen 
         name="Mapa" 
         component={Maps}
         options={{header: () => null}}/>
-        <tab.Screen 
+        <Tab.Screen 
         name="Mapinha" 
         component={Mapinha}
         options={{header: () => null}}/>
-      </Stack.Navigator>
+      </Tab.Navigator>
     </NavigationContainer>
   );
 }

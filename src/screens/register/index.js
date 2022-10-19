@@ -55,7 +55,7 @@ export function Register({ navigation }) {
 
         <TextInput
         style={styles.input}
-        placeholder="E-mail"
+        placeholder="Email"
         autoCorrect={false}
         onChangeText={text => setValue('email', text)}
         />

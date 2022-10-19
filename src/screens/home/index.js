@@ -7,7 +7,7 @@ import { useForm } from 'react-hook-form'
 
 export function Home({ navigation }) {
   const { register, setValue, handleSubmit } = useForm()
-  const [selectedCategory, setSelectedCategories] = useState('Escolha uma categoria');
+  const [selectedCategory, setSelectedCategories] = useState('1');
   const [categories, setCategories] = useState([]);
   const [items, setItems] = useState([]);
 
@@ -46,10 +46,11 @@ export function Home({ navigation }) {
           source={require("../../../assets/LOGOtg.png")}
         />  
           <Picker
+            style={styles.picker}
             selectedValue={selectedCategory}
-            onValueChange={(itemValue, itemIndex) => setSelectedCategories( itemValue)} >
+            onValueChange={(itemValue, itemIndex) =>setSelectedCategories(itemValue)} >
             {categories.map((item, key)=>(
-              <Picker.Item label={item.CAT_NAME} value={item.CAT_ID} key={key} />)
+              <Picker.Item label={item.CAT_NAME} value={item.CAT_ID} key={key}/>)
               )}
           </Picker>
           {
@@ -93,7 +94,13 @@ const styles = StyleSheet.create({
     flex:1,
     alignItems: 'center',
     justifyContent: 'center',
-    width: '90%',
+    width: '100%',
+  },
+  picker:{
+    flex:1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize:20,
   },
   logo:{
     resizeMode: "center",
@@ -130,11 +137,11 @@ const styles = StyleSheet.create({
     fontSize:20,
     color: 'rgba(106, 61, 116, 1)',
     },
-    listText: {
-      fontWeight: 'bold',
-      fontSize:20,
-      color: 'rgba(106, 61, 116, 1)',
-      textAlign: 'center',
-    },
+  listText: {
+    fontWeight: 'bold',
+    fontSize:20,
+    color: 'rgba(106, 61, 116, 1)',
+    textAlign: 'center',
+  },
     
 });

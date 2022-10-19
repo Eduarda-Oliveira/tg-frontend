@@ -11,7 +11,7 @@ import * as ImagePicker from 'expo-image-picker';
 export function RegisterItem({ navigation }) {
   const { register, setValue, handleSubmit } = useForm()
   const [categories, setCategories] = useState([]);
-  const [selectedCategory, setSelectedCategories] = useState("");
+  const [selectedCategory, setSelectedCategories] = useState('1');
   const [image, setImage] = React.useState(null);
 
   useEffect (() => {
@@ -82,7 +82,7 @@ export function RegisterItem({ navigation }) {
   return (
       <KeyboardAvoidingView style={styles.background}>
         <View style={styles.container}>
-        <Text style={styles.text}> Criar anúncio </Text>
+          <Text style={styles.text}> Criar anúncio </Text>
           <TextInput
           style={styles.input}
           placeholder="Título"
@@ -118,6 +118,7 @@ export function RegisterItem({ navigation }) {
         </TouchableOpacity>
 
         <Picker
+          style={styles.picker}
           selectedValue={selectedCategory}
           onValueChange={(itemValue, itemIndex) => setSelectedCategories( itemValue)} >
           {categories.map((item, key)=>(
@@ -147,6 +148,9 @@ const styles = StyleSheet.create({
     resizeMode: "center",
     height: 200,
     width: 200
+  },
+  picker:{
+    fontSize:20,
   },
   text:{
     height: 90,
@@ -198,7 +202,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize:20,
     color: '#FFF7C0',
-
   },
   btnRegister:{
     width: '50%',
