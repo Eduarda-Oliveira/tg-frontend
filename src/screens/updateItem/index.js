@@ -4,13 +4,13 @@ import { useEffect, useState } from "react";
 import { useForm } from 'react-hook-form'
 import api from '../../services/api';
 
-export function UpdateItem() {
+export function UpdateItem(route) {
   const { register, setValue, handleSubmit } = useForm()
   const [items, setItems] = useState({});
 
   useEffect(() => {
     let params ={
-      ITE_ID: 1 }
+      ITE_ID: route.params?.itemId}
     api.get( "/item/id", {params:params})
     .then(({data}) => {
       setItems(data.item)
@@ -21,7 +21,7 @@ export function UpdateItem() {
  
  const onSubmit = () => {
   let params ={
-    ITE_ID: 1,
+    ITE_ID: route.params?.itemId,
     ITE_TITLE: items.ITE_TITLE,
     ITE_PRICE: items.ITE_PRICE,
     ITE_DESCRIPTION: items.ITE_DESCRIPTION,
