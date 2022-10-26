@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
     color: '#222',
     fontSize: 17,
     fontWeight: 'bold',
-    placeholderTextColor: '#FFF7C0',
+    //placeholderTextColor: '#FFF7C0',
     borderRadius:20,
     padding: 10,
   },

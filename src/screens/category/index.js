@@ -2,7 +2,6 @@ import React from 'react';
 import {Image, View, Text, StyleSheet, ScrollView, KeyboardAvoidingView} from "react-native";
 import { useEffect, useState } from "react";
 import api from '../../services/api';
-import { withTheme } from 'react-native-elements';
 
 export function Category() {
  const [items, setItems] = useState([]);

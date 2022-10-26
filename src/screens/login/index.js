@@ -3,7 +3,6 @@ import { StyleSheet, Text, View, KeyboardAvoidingView, TextInput, TouchableOpaci
 import Icon from 'react-native-vector-icons/Feather';
 import { useEffect } from "react";
 import { useForm } from 'react-hook-form'
-import { Button } from 'react-native-elements';
 import api from '../../services/api';
 
 export function Login({ navigation }) {
@@ -101,7 +100,7 @@ const styles = StyleSheet.create({
     color: '#222',
     fontSize: 17,
     fontWeight: 'bold',
-    placeholderTextColor: '#FFF7C0',
+    //placeholderTextColor: '#FFF7C0',
     borderRadius:20,
     padding: 10,
   },

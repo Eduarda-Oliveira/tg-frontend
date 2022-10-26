@@ -1,7 +1,6 @@
 import React from 'react';
 import { Image, StyleSheet, Text, View, KeyboardAvoidingView, TextInput, TouchableOpacity, Alert} from 'react-native';
 import { useEffect } from "react";
-import { Button } from 'react-native-elements';
 import { useForm } from 'react-hook-form'
 import api from '../../services/api';
 
@@ -114,7 +113,7 @@ const styles = StyleSheet.create({
     color: '#222',
     fontSize: 17,
     fontWeight: 'bold',
-    placeholderTextColor: '#FFF7C0',
+    //placeholderTextColor: '#FFF7C0',
     borderRadius:20,
     padding: 10,
   },

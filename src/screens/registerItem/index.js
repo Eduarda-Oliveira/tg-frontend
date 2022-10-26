@@ -1,7 +1,6 @@
 import React from 'react';
 import { ScrollView, StyleSheet, Text, View, KeyboardAvoidingView, TextInput, TouchableOpacity, Picker} from 'react-native';
 import api from '../../services/api';
-import { Button } from 'react-native-elements';
 import RNPickerSelect from 'react-native-picker-select';
 import { useForm } from 'react-hook-form'
 import { useEffect, useState } from "react";
@@ -173,7 +172,7 @@ const styles = StyleSheet.create({
     color: '#222',
     fontSize: 17,
     fontWeight: 'bold',
-    placeholderTextColor: '#FFF7C0',
+    //placeholderTextColor: '#FFF7C0',
     borderRadius:20,
     padding: 10,
   },
