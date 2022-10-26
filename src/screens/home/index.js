@@ -1,8 +1,8 @@
 import React from 'react';
-import { Image, ScrollView, StyleSheet, Text, View, KeyboardAvoidingView, TouchableOpacity, Picker} from 'react-native';
+import { Image, ScrollView, StyleSheet, Text, View, KeyboardAvoidingView, TouchableOpacity} from 'react-native';
 import { useEffect, useState } from "react";
 import api from '../../services/api';
-import RNPickerSelect from 'react-native-picker-select';
+import {Picker} from '@react-native-picker/picker';
 import { useForm } from 'react-hook-form'
 
 export function Home({ navigation }) {

@@ -1,7 +1,7 @@
 import React from 'react';
-import { ScrollView, StyleSheet, Text, View, KeyboardAvoidingView, TextInput, TouchableOpacity, Picker} from 'react-native';
+import { ScrollView, StyleSheet, Text, View, KeyboardAvoidingView, TextInput, TouchableOpacity} from 'react-native';
 import api from '../../services/api';
-import RNPickerSelect from 'react-native-picker-select';
+import {Picker} from '@react-native-picker/picker';
 import { useForm } from 'react-hook-form'
 import { useEffect, useState } from "react";
 import * as ImagePicker from 'expo-image-picker';
