@@ -104,6 +104,8 @@ export function RegisterItem({ navigation }) {
           />
 
           <TextInput
+           multiline
+           numberOfLines={4}
           style={styles.input}
           placeholder="Descrição"
           autoCorrect={false}

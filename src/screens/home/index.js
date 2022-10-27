@@ -73,7 +73,7 @@ export function Home({ navigation }) {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.btnSubmit}
-            onPress={ () => navigation.navigate('Category')}
+            onPress={ () => navigation.navigate('ListItems')}
             >
             <Text style={styles.submitText}>Buscar todos</Text>
           </TouchableOpacity>
