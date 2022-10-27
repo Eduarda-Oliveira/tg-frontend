@@ -1,16 +1,16 @@
 import React from 'react';
-import {Image, View, Text, StyleSheet, TouchableOpacity, ScrollView, KeyboardAvoidingView, TextInput} from "react-native";
+import {View, Text, StyleSheet, TouchableOpacity, KeyboardAvoidingView, TextInput} from "react-native";
 import { useEffect, useState } from "react";
 import { useForm } from 'react-hook-form'
 import api from '../../services/api';
 
-export function UpdateItem(route) {
+export function UpdateItem({ navigation, route }) {
   const { register, setValue, handleSubmit } = useForm()
   const [items, setItems] = useState({});
 
   useEffect(() => {
     let params ={
-      ITE_ID: route.params?.itemId}
+      ITE_ID: route.params.id}
     api.get( "/item/id", {params:params})
     .then(({data}) => {
       setItems(data.item)
@@ -21,7 +21,7 @@ export function UpdateItem(route) {
  
  const onSubmit = () => {
   let params ={
-    ITE_ID: route.params?.itemId,
+    ITE_ID: route.params.id,
     ITE_TITLE: items.ITE_TITLE,
     ITE_PRICE: items.ITE_PRICE,
     ITE_DESCRIPTION: items.ITE_DESCRIPTION,
@@ -45,6 +45,7 @@ export function UpdateItem(route) {
         <TextInput
           style={styles.input}
           placeholder="Título"
+          placeholderTextColor={'#FFF7C0'}
           editable={true}
           autoCorrect={false}
           onChangeText={(text) => setItems({ ITE_TITLE: text })}
@@ -53,6 +54,7 @@ export function UpdateItem(route) {
           <TextInput
           style={styles.input}
           placeholder="Contato"
+          placeholderTextColor={'#FFF7C0'}
           autoCorrect={false}
           value={items.ITE_CONTACT}
           onChangeText={(text) => setItems({ ITE_CONTACT: text })}
@@ -60,6 +62,7 @@ export function UpdateItem(route) {
           <TextInput
           style={styles.input}
           placeholder="Valor"
+          placeholderTextColor={'#FFF7C0'}
           autoCorrect={false}
           value={items.ITE_PRICE}
           onChangeText={(text) => setItems({ ITE_PRICE: text })}
@@ -69,6 +72,7 @@ export function UpdateItem(route) {
           numberOfLines={4}
           style={styles.input}
           placeholder="Descrição"
+          placeholderTextColor={'#FFF7C0'}
           autoCorrect={false}
           value={items.ITE_DESCRIPTION}
           onChangeText={(text) => setItems({ ITE_DESCRIPTION: text })}

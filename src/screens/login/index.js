@@ -38,6 +38,7 @@ export function Login({ navigation }) {
         <TextInput
         style={styles.input}
         placeholder="Email"
+        placeholderTextColor={'#FFF7C0'}
         keyboardType="email-address"
         autoCorrect={false}
         onChangeText={text => setValue('email', text)}
@@ -48,6 +49,7 @@ export function Login({ navigation }) {
         style={styles.input}
         icon="lock"
         placeholder="Senha"
+        placeholderTextColor={'#FFF7C0'}
         autoCorrect={false}
         onChangeText={text => setValue('password', text)}
         />

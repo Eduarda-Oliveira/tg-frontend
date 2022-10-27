@@ -26,7 +26,7 @@ function UpdateStackScreen() {
     return (
       <Stack.Navigator>
         <Stack.Screen name="Item" component={Item} options={{header: () => null}}/>
-        <Stack.Screen name="UpdateItems" component={UpdateItem} options={{header: () => null}}/>
+        <Stack.Screen name="UpdateItem" component={UpdateItem} options={{header: () => null}}/>
         <Stack.Screen name="ListItems" component={ListItems} options={{header: () => null}}/>
       </Stack.Navigator>
     );

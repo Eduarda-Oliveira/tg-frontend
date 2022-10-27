@@ -41,6 +41,7 @@ export function Register({ navigation }) {
         <TextInput
         style={styles.input}
         placeholder="Nome completo"
+        placeholderTextColor={'#FFF7C0'}
         autoCorrect={false}
         onChangeText={text => setValue('name', text)}
         />
@@ -48,6 +49,7 @@ export function Register({ navigation }) {
         <TextInput
         style={styles.input}
         placeholder="CPF"
+        placeholderTextColor={'#FFF7C0'}
         autoCorrect={false}
         onChangeText={text => setValue('cpf', text)}
         />
@@ -55,6 +57,7 @@ export function Register({ navigation }) {
         <TextInput
         style={styles.input}
         placeholder="Email"
+        placeholderTextColor={'#FFF7C0'}
         autoCorrect={false}
         onChangeText={text => setValue('email', text)}
         />
@@ -62,6 +65,7 @@ export function Register({ navigation }) {
          <TextInput
         style={styles.input}
         placeholder="Senha"
+        placeholderTextColor={'#FFF7C0'}
         autoCorrect={false}
         onChangeText={text => setValue('password', text)}
         />
@@ -113,7 +117,6 @@ const styles = StyleSheet.create({
     color: '#222',
     fontSize: 17,
     fontWeight: 'bold',
-    //placeholderTextColor: '#FFF7C0',
     borderRadius:20,
     padding: 10,
   },

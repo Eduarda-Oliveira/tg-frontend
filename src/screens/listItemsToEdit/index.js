@@ -3,7 +3,7 @@ import {Image, View, Text, StyleSheet, ScrollView, KeyboardAvoidingView, Touchab
 import { useEffect, useState } from "react";
 import api from '../../services/api';
 
-export function ListItems({ navigation }) {
+export function ListItemsToEdit({ navigation }) {
  const [items, setItems] = useState([]);
 
  useEffect(() => {
@@ -31,13 +31,13 @@ export function ListItems({ navigation }) {
 
                   <TouchableOpacity
                     style={styles.btnSubmit}
-                    onPress={ () => navigation.navigate('Anuncio', {
-                      screen: 'Item',
+                    onPress={ () => navigation.navigate('AnuncioToEdit', {
+                      screen: 'ItemToEdit',
                       params: { itemId: item.ITE_ID },
                     })
                     }
                   >
-                   <Text style={styles.submitText}>ver</Text>
+                   <Text style={styles.submitText}>Editar</Text>
                   </TouchableOpacity>
                   </>
                 )

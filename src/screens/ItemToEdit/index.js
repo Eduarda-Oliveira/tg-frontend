@@ -3,7 +3,7 @@ import {View, Text, Image, StyleSheet, KeyboardAvoidingView, TouchableOpacity} f
 import { useEffect, useState } from "react";
 import api from '../../services/api';
 
-export function Item({ route }) {
+export function ItemToEdit({ navigation, route }) {
   const [items, setItems] = useState("");
 
   useEffect(() => {
@@ -27,6 +27,16 @@ export function Item({ route }) {
             {items.ITE_TITLE} {items.ITE_DESCRIPTION} {items.ITE_PRICE} {items.ITE_CATEGORY} 
           <Image source={{ uri: items.ITE_IMAGE }} style={styles.thumbnail} />
           </Text>
+
+
+          <TouchableOpacity
+            style={styles.btnSubmit}
+            onPress={ () => navigation.navigate('UpdateItem', {
+              id: items.ITE_ID })
+            }
+            >
+            <Text style={styles.submitText}>Editar</Text>
+          </TouchableOpacity>
 
       </View>
     </KeyboardAvoidingView>

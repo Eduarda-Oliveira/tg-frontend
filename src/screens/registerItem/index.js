@@ -85,6 +85,7 @@ export function RegisterItem({ navigation }) {
           <TextInput
           style={styles.input}
           placeholder="Título"
+          placeholderTextColor={'#FFF7C0'}
           autoCorrect={false}
           onChangeText={text => setValue('title', text)}
           />
@@ -92,6 +93,7 @@ export function RegisterItem({ navigation }) {
           <TextInput
           style={styles.input}
           placeholder="Contato"
+          placeholderTextColor={'#FFF7C0'}
           autoCorrect={false}
           onChangeText={text => setValue('contact', text)}
           />
@@ -99,6 +101,7 @@ export function RegisterItem({ navigation }) {
           <TextInput
           style={styles.input}
           placeholder="Valor"
+          placeholderTextColor={'#FFF7C0'}
           autoCorrect={false}
           onChangeText={text => setValue('price', text)}
           />
@@ -108,6 +111,7 @@ export function RegisterItem({ navigation }) {
            numberOfLines={4}
           style={styles.input}
           placeholder="Descrição"
+          placeholderTextColor={'#FFF7C0'}
           autoCorrect={false}
           onChangeText={text => setValue('description', text)}
           />
