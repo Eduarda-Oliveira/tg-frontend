@@ -1,6 +1,5 @@
 import React from 'react';
 import { StyleSheet, Text, View, KeyboardAvoidingView, TextInput, TouchableOpacity, Image} from 'react-native';
-import Icon from 'react-native-vector-icons/Feather';
 import { useEffect } from "react";
 import { useForm } from 'react-hook-form'
 import api from '../../services/api';
