@@ -22,23 +22,25 @@ export function ListItemsToEdit({ navigation }) {
           {
               items.map((item, index) =>{
                 return( <>
+                  <View style={styles.anuncio}>
                   <Text 
                     style={styles.listText}
                     key={index}>
-                    {item.ITE_ID} {item.ITE_TITLE} {item.ITE_DESCRIPTION} {item.ITE_PRICE} 
+                     {item.ITE_TITLE} {item.ITE_DESCRIPTION} {item.ITE_PRICE} 
                     <Image source={{ uri: item.ITE_IMAGE }} style={styles.thumbnail} />
                   </Text>
 
                   <TouchableOpacity
                     style={styles.btnSubmit}
-                    onPress={ () => navigation.navigate('AnuncioToEdit', {
-                      screen: 'ItemToEdit',
+                    onPress={ () => navigation.navigate('ListToEdit', {
+                      screen: 'AnuncioToEdit',
                       params: { itemId: item.ITE_ID },
                     })
                     }
                   >
-                   <Text style={styles.submitText}>Editar</Text>
+                   <Text style={styles.submitText}>ver</Text>
                   </TouchableOpacity>
+                  </View>
                   </>
                 )
               })
@@ -60,6 +62,14 @@ const styles = StyleSheet.create({
   },
 
   container:{
+    flex:1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '90%',
+  },
+
+  anuncio:{
+    top: '10%',
     flex:1,
     alignItems: 'center',
     justifyContent: 'center',

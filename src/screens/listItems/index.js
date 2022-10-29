@@ -22,10 +22,11 @@ export function ListItems({ navigation }) {
           {
               items.map((item, index) =>{
                 return( <>
+                  <View style={styles.anuncio}>
                   <Text 
                     style={styles.listText}
                     key={index}>
-                    {item.ITE_ID} {item.ITE_TITLE} {item.ITE_DESCRIPTION} {item.ITE_PRICE} 
+                     {item.ITE_TITLE} {item.ITE_DESCRIPTION} {item.ITE_PRICE} 
                     <Image source={{ uri: item.ITE_IMAGE }} style={styles.thumbnail} />
                   </Text>
 
@@ -39,6 +40,7 @@ export function ListItems({ navigation }) {
                   >
                    <Text style={styles.submitText}>ver</Text>
                   </TouchableOpacity>
+                  </View>
                   </>
                 )
               })
@@ -60,6 +62,14 @@ const styles = StyleSheet.create({
   },
 
   container:{
+    flex:1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '90%',
+  },
+
+  anuncio:{
+    top: '10%',
     flex:1,
     alignItems: 'center',
     justifyContent: 'center',

@@ -1,11 +1,11 @@
 import React from 'react';
 import { StyleSheet, Text, View, KeyboardAvoidingView, TextInput, TouchableOpacity, Image} from 'react-native';
 import { useEffect } from "react";
-import { useForm } from 'react-hook-form'
+import { useForm, Controller } from 'react-hook-form'
 import api from '../../services/api';
 
 export function Login({ navigation }) {
-  const { register, setValue, handleSubmit } = useForm()
+  const { control, register, setValue, handleSubmit, formState: { errors }  } = useForm()
 
   useEffect(() => {
     register('email')
@@ -33,25 +33,48 @@ export function Login({ navigation }) {
           style={styles.logo}
           source={require("../../../assets/LOGOtg.png")}
         />        
-        <Text style={styles.text}> Login </Text>
-        <TextInput
-        style={styles.input}
-        placeholder="Email"
-        placeholderTextColor={'#FFF7C0'}
-        keyboardType="email-address"
-        autoCorrect={false}
-        onChangeText={text => setValue('email', text)}
-        />    
+        <Text style={styles.text}> Login </Text>    
+        
+        <Controller
+        control={control}
+        rules={{
+         required: true,
+        }}
+        render={({ field: { onChange, onBlur, value } }) => (
+          <TextInput
+          style={styles.input}
+          placeholder="Email"
+          placeholderTextColor={'#FFF7C0'}
+          keyboardType="email-address"
+          autoCorrect={false}
+          onChangeText={text => setValue('email', text)}
+          
+          />
+        )}
+        name="Email"
+      />
+      {errors.Email && <Text> Email é obrigatório </Text>}
 
-        <TextInput
-        secureTextEntry
-        style={styles.input}
-        icon="lock"
-        placeholder="Senha"
-        placeholderTextColor={'#FFF7C0'}
-        autoCorrect={false}
-        onChangeText={text => setValue('password', text)}
-        />
+      <Controller
+        control={control}
+        rules={{
+         required: true,
+        }}
+        render={({ field: { onChange, onBlur, value } }) => (
+          <TextInput
+          secureTextEntry
+          style={styles.input}
+          icon="lock"
+          placeholder="Senha"
+          placeholderTextColor={'#FFF7C0'}
+          autoCorrect={false}
+          onChangeText={text => setValue('password', text)}
+          
+          />
+        )}
+        name="Senha"
+      />
+      {errors.Senha && <Text> Senha é obrigatória </Text>}
 
         <TouchableOpacity
           style={styles.btnSubmit}

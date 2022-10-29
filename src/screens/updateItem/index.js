@@ -2,11 +2,13 @@ import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, KeyboardAvoidingView, TextInput} from "react-native";
 import { useEffect, useState } from "react";
 import { useForm } from 'react-hook-form'
+import Checkbox from 'expo-checkbox';
 import api from '../../services/api';
 
 export function UpdateItem({ navigation, route }) {
   const { register, setValue, handleSubmit } = useForm()
   const [items, setItems] = useState({});
+  const [isChecked, setChecked] = useState();
 
   useEffect(() => {
     let params ={
@@ -19,6 +21,13 @@ export function UpdateItem({ navigation, route }) {
     });
   }, []);
  
+  if (items.ITE_ENABLED = true) {
+    return (
+      setChecked(true)
+    );
+  }
+
+  console.log(isChecked)
  const onSubmit = () => {
   let params ={
     ITE_ID: route.params.id,
@@ -26,7 +35,7 @@ export function UpdateItem({ navigation, route }) {
     ITE_PRICE: items.ITE_PRICE,
     ITE_DESCRIPTION: items.ITE_DESCRIPTION,
     ITE_CONTACT: items.ITE_CONTACT,
-    ITE_ENABLED: true
+    ITE_ENABLED: isChecked
         }
   console.log(params)
   api.put('/item/update', params)
@@ -77,6 +86,13 @@ export function UpdateItem({ navigation, route }) {
           value={items.ITE_DESCRIPTION}
           onChangeText={(text) => setItems({ ITE_DESCRIPTION: text })}
           />
+         <Checkbox
+          style={styles.checkbox}
+          value={isChecked}
+          onValueChange={setChecked}
+          color={isChecked ? 'rgba(103, 64, 119, 0.78)' : undefined}
+          
+        />
           <TouchableOpacity
             style={styles.btnSubmit}
             onPress={handleSubmit(onSubmit)}>
@@ -123,6 +139,11 @@ const styles = StyleSheet.create({
     height: 150,
     resizeMode: 'contain',
   },
+  
+  checkbox: {
+    margin: 8,
+  },
+
   btnSubmit:{
     backgroundColor: 'rgba(106, 61, 116, 1)',
     width: '50%',

@@ -155,6 +155,7 @@ const styles = StyleSheet.create({
     width: 200
   },
   picker:{
+    width: '100%',
     fontSize:20,
   },
   text:{
