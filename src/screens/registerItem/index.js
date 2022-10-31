@@ -2,13 +2,13 @@ import React from 'react';
 import { ScrollView, StyleSheet, Text, View, KeyboardAvoidingView, TextInput, TouchableOpacity} from 'react-native';
 import api from '../../services/api';
 import {Picker} from '@react-native-picker/picker';
-import { useForm } from 'react-hook-form'
+import { useForm, Controller } from 'react-hook-form'
 import { useEffect, useState } from "react";
 import * as ImagePicker from 'expo-image-picker';
 
 
 export function RegisterItem({ navigation }) {
-  const { register, setValue, handleSubmit } = useForm()
+  const { control, register, setValue, handleSubmit, formState: { errors }  } = useForm()
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategories] = useState('1');
   const [image, setImage] = React.useState(null);
@@ -82,45 +82,94 @@ export function RegisterItem({ navigation }) {
       <KeyboardAvoidingView style={styles.background}>
         <View style={styles.container}>
           <Text style={styles.text}> Criar anúncio </Text>
-          <TextInput
-          style={styles.input}
-          placeholder="Título"
-          placeholderTextColor={'#FFF7C0'}
-          autoCorrect={false}
-          onChangeText={text => setValue('title', text)}
+          <Controller
+            control={control}
+            rules={{
+              required: true,
+            }}
+            render={({ field: { onChange, onBlur, value } }) => (
+            <TextInput
+              style={styles.input}
+              placeholder="Título"
+              placeholderTextColor={'#FFF7C0'}
+              autoCorrect={false}
+              onChangeText={text => setValue('title', text)}
+            />
+            )}
+            name="Título"
           />
-
-          <TextInput
-          style={styles.input}
-          placeholder="Contato"
-          placeholderTextColor={'#FFF7C0'}
-          autoCorrect={false}
-          onChangeText={text => setValue('contact', text)}
+          {errors.Título && <Text> Título é obrigatório </Text>}
+          <Controller
+            control={control}
+            rules={{
+            required: true,
+            }}
+            render={({ field: { onChange, onBlur, value } }) => (
+            <TextInput
+              style={styles.input}
+              placeholder="Contato"
+              placeholderTextColor={'#FFF7C0'}
+              autoCorrect={false}
+              onChangeText={text => setValue('contact', text)}
+            />
+            )}
+            name="Contato"
           />
-
-          <TextInput
-          style={styles.input}
-          placeholder="Valor"
-          placeholderTextColor={'#FFF7C0'}
-          autoCorrect={false}
-          onChangeText={text => setValue('price', text)}
+           {errors.Contato && <Text> Contato é obrigatório </Text>}
+          <Controller
+            control={control}
+            rules={{
+            required: true,
+            }}
+            render={({ field: { onChange, onBlur, value } }) => (
+            <TextInput
+              style={styles.input}
+              placeholder="Valor"
+              placeholderTextColor={'#FFF7C0'}
+              autoCorrect={false}
+              onChangeText={text => setValue('price', text)}
+            />
+            )}
+            name="Valor"
           />
-
-          <TextInput
-           multiline
-           numberOfLines={4}
-          style={styles.input}
-          placeholder="Descrição"
-          placeholderTextColor={'#FFF7C0'}
-          autoCorrect={false}
-          onChangeText={text => setValue('description', text)}
+          {errors.Valor && <Text> Valor é obrigatório </Text>}
+          <Controller
+            control={control}
+            rules={{
+            required: true,
+            }}
+            render={({ field: { onChange, onBlur, value } }) => (
+              <TextInput
+                multiline
+                numberOfLines={4}
+                style={styles.input}
+                placeholder="Descrição"
+                placeholderTextColor={'#FFF7C0'}
+                autoCorrect={false}
+                onChangeText={text => setValue('description', text)}
+             />
+          )}
+          name="Descrição"
           />
+          {errors.Descrição && <Text> Descrição é obrigatória </Text>}
+          <Controller
+            control={control}
+            rules={{
+            required: true,
+            }}
+            render={({ field: { onChange, onBlur, value } }) => (
+              <TouchableOpacity 
+                onPress={openImagePickerAsync} 
+                style={styles.button} >
+                <Text style={styles.buttonText}>Selecione uma Imagem</Text>
+            </TouchableOpacity>
+          )}
+          name="Descrição"
+          />
+          {errors.Descrição && <Text> Imagem é obrigatória </Text>}
 
-        <TouchableOpacity 
-          onPress={openImagePickerAsync} 
-          style={styles.button} >
-          <Text style={styles.buttonText}>Selecione uma Imagem</Text>
-        </TouchableOpacity>
+
+       
 
         <Picker
           style={styles.picker}

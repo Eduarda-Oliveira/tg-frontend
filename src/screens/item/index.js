@@ -22,50 +22,97 @@ export function Item({ route }) {
   return(
     <KeyboardAvoidingView style={styles.background}>
       <View style={styles.container}>
-          <Text style={styles.submitText}>{items.ITE_TITLE}</Text>
-          <Text style={styles.listText}>
-            {items.ITE_TITLE} {items.ITE_DESCRIPTION} {items.ITE_PRICE} {items.ITE_CATEGORY} 
-          <Image source={{ uri: items.ITE_IMAGE }} style={styles.thumbnail} />
+        <View style={styles.anuncio}>
+          <Text 
+          style={styles.listText}
+          >
+            {items.ITE_TITLE} 
           </Text>
-
+          <Image source={{ uri: items.ITE_IMAGE }} style={styles.thumbnail} />
+          <Text
+            style={styles.descriptionText}
+          >
+            {items.ITE_DESCRIPTION} 
+          </Text>
+          <Text
+            style={styles.valueText}
+          >
+            {items.ITE_PRICE} 
+          </Text>
+          <Text
+            style={styles.contactText}
+          >
+            {items.ITE_CONTACT} 
+          </Text>
+          <Text
+            style={styles.valueText}
+          >
+            {items.ITE_CATEGORY} 
+          </Text>
+        </View>
       </View>
     </KeyboardAvoidingView>
   )
 }
 const styles = StyleSheet.create({
   background: {
-    flex: 1,
-    backgroundColor: '#FFF7C0',
-    alignItems: 'center',
     justifyContent: 'center',
+    width: '100%',
+    height: '100%'
   },
   container:{
+    flex: 1,
+    backgroundColor: '#FFF7C0',
+    width: '100%',
+    height: '100%',
+  },
+  Scroll:{
+    flex: 1,
+  },
+  anuncio:{
     flex:1,
     alignItems: 'center',
     justifyContent: 'center',
     width: '100%',
+    height: '100%',
   },
-  picker:{
-    flex:1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    fontSize:20,
+  listText: {
+    fontWeight: 'bold',
+    fontSize: 45,
+    color: 'rgba(106, 61, 116, 1)',
+    textAlign: 'center',
+    bottom:'1%',
+    top: '1%',
   },
-  logo:{
-    resizeMode: "center",
-    height: 200,
-    width: 200
+  descriptionText: {
+    fontWeight: 'bold',
+    fontSize: 30,
+    color: 'rgba(106, 61, 116, 1)',
+    textAlign: 'center',
+    bottom:'1%',
+    top: '1%',
+  },
+  valueText: {
+    fontWeight: 'bold',
+    fontSize: 30,
+    color: 'rgba(106, 61, 116, 1)',
+    textAlign: 'center',
+  },
+  contactText: {
+    fontWeight: 'bold',
+    fontSize: 30,
+    color: 'rgba(106, 61, 116, 1)',
+    textAlign: 'center',
   },
   thumbnail: {
     width: 300,
-    height: 150,
+    height: 300,
     resizeMode: 'contain',
   },
-  
   btnSubmit:{
     backgroundColor: 'rgba(106, 61, 116, 1)',
-    width: '90%',
-    height:45,
+    width: '50%',
+    height:40,
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 20,
@@ -75,24 +122,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize:20,
     color: '#FFF7C0',
+
   },
-  btnRegister:{
-    //width: '100%',
-    //height:45,
-    //backgroundColor: 'rgba(106, 61, 116, 1)',
-  },
-  registerText:{
-    fontWeight: 'bold',
-    fontSize:20,
-    color: 'rgba(106, 61, 116, 1)',
-    },
-  listText: {
-    fontWeight: 'bold',
-    fontSize:20,
-    color: 'rgba(106, 61, 116, 1)',
-    textAlign: 'center',
-  },
-    
 });
 
   
