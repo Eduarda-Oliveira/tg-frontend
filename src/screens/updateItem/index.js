@@ -8,7 +8,7 @@ import api from '../../services/api';
 export function UpdateItem({ navigation, route }) {
   const { register, setValue, handleSubmit } = useForm()
   const [items, setItems] = useState({});
-  const [isChecked, setChecked] = useState();
+  const [isChecked, setChecked] = useState(true);
 
   useEffect(() => {
     let params ={
@@ -20,12 +20,6 @@ export function UpdateItem({ navigation, route }) {
       console.log(error.message)
     });
   }, []);
- 
-  if (items.ITE_ENABLED = true) {
-    return (
-      setChecked(true)
-    );
-  }
 
   console.log(isChecked)
  const onSubmit = () => {
@@ -86,6 +80,7 @@ export function UpdateItem({ navigation, route }) {
           value={items.ITE_DESCRIPTION}
           onChangeText={(text) => setItems({ ITE_DESCRIPTION: text })}
           />
+          <Text style={styles.registerText} > Ativar Anúncio?</Text>
          <Checkbox
           style={styles.checkbox}
           value={isChecked}
@@ -169,4 +164,9 @@ const styles = StyleSheet.create({
     borderRadius:20,
     padding: 10,
   },
+  registerText:{
+    fontWeight: 'bold',
+    fontSize:20,
+    color: 'rgba(106, 61, 116, 1)',
+    },
 });

@@ -38,7 +38,7 @@ export function Home({ navigation }) {
           
           <TouchableOpacity
             style={styles.btnAll}
-            onPress={ () => navigation.navigate('Anuncio', {screen: "ListItems"})}
+            onPress={ () => navigation.navigate('ListToEdit')}
             >
             <Text style={styles.submitText}> Meus Anúncios</Text>
           </TouchableOpacity>

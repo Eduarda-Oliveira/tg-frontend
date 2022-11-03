@@ -1,12 +1,12 @@
 import React from 'react';
 import { Image, StyleSheet, Text, View, KeyboardAvoidingView, TextInput, TouchableOpacity, Alert} from 'react-native';
 import { useEffect } from "react";
-import { useForm, Controller } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import api from '../../services/api';
 
 
 export function Register({ navigation }) {
-  const { control, formState: { errors }, register, setValue, handleSubmit } = useForm()
+  const { register, setValue, handleSubmit } = useForm()
 
   useEffect(() => {
     register('name')
@@ -37,82 +37,39 @@ export function Register({ navigation }) {
       <Image
           style={styles.logo}
           source={require("../../../assets/LOGOtg.png")}
-        /> 
-        <Controller
-        control={control}
-        rules={{
-         required: true,
-        }}
-        render={({ field: { onChange, onBlur, value } }) => (
-          <TextInput
-          style={styles.input}
-          placeholder="Nome completo"
-          placeholderTextColor={'#FFF7C0'}
-          autoCorrect={false}
-          onChangeText={text => setValue('name', text)}
-          />
-        )}
-        name="Nome"
-      />
-      {errors.Nome && <Text> Nome é obrigatório </Text>}
-
-       
-        <Controller
-        control={control}
-        rules={{
-         required: true,
-        }}
-        render={({ field: { onChange, onBlur, value } }) => (
-          <TextInput
-          style={styles.input}
-          placeholder="CPF"
-          placeholderTextColor={'#FFF7C0'}
-          autoCorrect={false}
-          onChangeText={text => setValue('cpf', text)}
-          />
-        )}
-        name="CPF"
-      />
-      {errors.CPF && <Text> CPF é obrigatório </Text>}
-
-      <Controller
-        control={control}
-        rules={{
-         required: true,
-        }}
-        render={({ field: { onChange, onBlur, value } }) => (
-          <TextInput
-          style={styles.input}
-          placeholder="Email"
-          placeholderTextColor={'#FFF7C0'}
-          autoCorrect={false}
-          onChangeText={text => setValue('email', text)}
+        />  
+        <TextInput
+        style={styles.input}
+        placeholder="Nome completo"
+        placeholderTextColor={'#FFF7C0'}
+        autoCorrect={false}
+        onChangeText={text => setValue('name', text)}
         />
-        )}
-        name="Email"
-      />
-      {errors.Email && <Text> Email é obrigatório </Text>}
-        
-      <Controller
-        control={control}
-        rules={{
-         required: true,
-        }}
-        render={({ field: { onChange, onBlur, value } }) => (
-          <TextInput
-          secureTextEntry
-          style={styles.input}
-          placeholder="Senha"
-          placeholderTextColor={'#FFF7C0'}
-          autoCorrect={false}
-          onChangeText={text => setValue('password', text)}
-          />
-        )}
-        name="Senha"
-      />
-      {errors.Senha && <Text> Senha é obrigatória </Text>}
-        
-         
+
+        <TextInput
+        style={styles.input}
+        placeholder="CPF"
+        placeholderTextColor={'#FFF7C0'}
+        autoCorrect={false}
+        onChangeText={text => setValue('cpf', text)}
+        />
+
+        <TextInput
+        style={styles.input}
+        placeholder="Email"
+        placeholderTextColor={'#FFF7C0'}
+        autoCorrect={false}
+        onChangeText={text => setValue('email', text)}
+        />
+
+         <TextInput
+         secureTextEntry
+        style={styles.input}
+        placeholder="Senha"
+        placeholderTextColor={'#FFF7C0'}
+        autoCorrect={false}
+        onChangeText={text => setValue('password', text)}
+        />
         <TouchableOpacity
           style={styles.btnSubmit}
           onPress={handleSubmit(onSubmit)}>

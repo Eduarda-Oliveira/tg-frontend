@@ -35,33 +35,16 @@ export function Login({ navigation }) {
         />        
         <Text style={styles.text}> Login </Text>    
         
-        <Controller
-        control={control}
-        rules={{
-         required: true,
-        }}
-        render={({ field: { onChange, onBlur, value } }) => (
-          <TextInput
+        <TextInput
           style={styles.input}
           placeholder="Email"
           placeholderTextColor={'#FFF7C0'}
           keyboardType="email-address"
           autoCorrect={false}
           onChangeText={text => setValue('email', text)}
-          
           />
-        )}
-        name="Email"
-      />
-      {errors.Email && <Text> Email é obrigatório </Text>}
 
-      <Controller
-        control={control}
-        rules={{
-         required: true,
-        }}
-        render={({ field: { onChange, onBlur, value } }) => (
-          <TextInput
+      <TextInput
           secureTextEntry
           style={styles.input}
           icon="lock"
@@ -69,12 +52,7 @@ export function Login({ navigation }) {
           placeholderTextColor={'#FFF7C0'}
           autoCorrect={false}
           onChangeText={text => setValue('password', text)}
-          
           />
-        )}
-        name="Senha"
-      />
-      {errors.Senha && <Text> Senha é obrigatória </Text>}
 
         <TouchableOpacity
           style={styles.btnSubmit}
