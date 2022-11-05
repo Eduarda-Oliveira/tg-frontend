@@ -42,9 +42,7 @@ export function Search({ navigation }) {
     <SafeAreaView
     style={{ flex: 1, backgroundColor: '#FFF7C0'}}
   >
-    <KeyboardAvoidingView style={styles.background}>
-      <ScrollView style={styles.Scroll}>
-        <View style={styles.container}>
+      <ScrollView style={styles.container}>
         <Image
           style={styles.logo}
           source={require("../../../assets/LOGOtg.png")}
@@ -64,7 +62,7 @@ export function Search({ navigation }) {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.btnAll}
-            onPress={ () => navigation.navigate('Anuncio', {screen: "ListItems"})}
+            onPress={ () => navigation.navigate('Busca', {screen: "ListItems"})}
             >
             <Text style={styles.submitText}>Buscar todos</Text>
           </TouchableOpacity>
@@ -91,7 +89,7 @@ export function Search({ navigation }) {
 
                     <TouchableOpacity
                       style={styles.btnSubmit}
-                      onPress={ () => navigation.navigate('Anuncio', {
+                      onPress={ () => navigation.navigate('Busca', {
                         screen: 'Item',
                         params: { itemId: item.ITE_ID },
                       })
@@ -104,29 +102,17 @@ export function Search({ navigation }) {
             )
           })
         }
-        
-        </View>
       </ScrollView>
-    </KeyboardAvoidingView>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  background: {
-    flex: 1,
-    backgroundColor: '#FFF7C0',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   container:{
     flex: 1,
     backgroundColor: '#FFF7C0',
     width: '100%',
     height: '100%',
-  },
-  Scroll:{
-    flex: 1,
   },
   picker:{
     flex:1,
@@ -141,8 +127,6 @@ const styles = StyleSheet.create({
     width: 200
   },
   anuncio:{
-    top: '1%',
-    bottom:'50%',
     flex:1,
     alignItems: 'center',
     justifyContent: 'center',
@@ -154,24 +138,18 @@ const styles = StyleSheet.create({
     fontSize: 30,
     color: 'rgba(106, 61, 116, 1)',
     textAlign: 'center',
-    bottom:'1%',
-    top: '1%',
   },
   descriptionText: {
     fontWeight: 'bold',
     fontSize: 20,
     color: 'rgba(106, 61, 116, 1)',
     textAlign: 'center',
-    bottom:'1%',
-    top: '1%',
   },
   valueText: {
     fontWeight: 'bold',
     fontSize: 20,
     color: 'rgba(106, 61, 116, 1)',
     textAlign: 'center',
-    bottom:'1%',
-    top: '1%',
   },
   thumbnail: {
     width: 200,
@@ -179,7 +157,6 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   btnSubmit:{
-    //left: '55%',
     backgroundColor: 'rgba(106, 61, 116, 1)',
     width: '50%',
     height:40,
@@ -203,14 +180,12 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize:20,
     color: '#FFF7C0',
-
   },
   btnRegister:{
     left: '20%',
     width: '50%',
     height:40,
     alignItems: 'center',
-    //justifyContent: 'center',
   },
   registerText:{
     fontWeight: 'bold',

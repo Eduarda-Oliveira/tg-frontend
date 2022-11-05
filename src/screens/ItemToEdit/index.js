@@ -44,6 +44,16 @@ export function ItemToEdit({ navigation, route }) {
           {items.ITE_CONTACT} 
         </Text>
         <Text
+            style={styles.contactText}
+          >
+            {items.ITE_CITY} 
+          </Text>
+          <Text
+            style={styles.contactText}
+          >
+            {items.ITE_NEIGHBORHOOD} 
+          </Text>
+        <Text
           style={styles.valueText}
         >
           {items.ITE_CATEGORY} 

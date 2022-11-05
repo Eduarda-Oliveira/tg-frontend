@@ -29,6 +29,8 @@ export function UpdateItem({ navigation, route }) {
     ITE_PRICE: items.ITE_PRICE,
     ITE_DESCRIPTION: items.ITE_DESCRIPTION,
     ITE_CONTACT: items.ITE_CONTACT,
+    ITE_CITY: items.ITE_CITY,
+    ITE_NEIGHBORHOOD: items.ITE_NEIGHBORHOOD,
     ITE_ENABLED: isChecked
         }
   console.log(params)
@@ -62,6 +64,22 @@ export function UpdateItem({ navigation, route }) {
           value={items.ITE_CONTACT}
           onChangeText={(text) => setItems({ ITE_CONTACT: text })}
           />
+           <TextInput
+          style={styles.input}
+          placeholder="Cidade"
+          placeholderTextColor={'#FFF7C0'}
+          autoCorrect={false}
+          value={items.ITE_CITY}
+          onChangeText={(text) => setItems({ ITE_CITY: text })}
+          />
+           <TextInput
+          style={styles.input}
+          placeholder="Bairro"
+          placeholderTextColor={'#FFF7C0'}
+          autoCorrect={false}
+          value={items.ITE_NEIGHBORHOOD}
+          onChangeText={(text) => setItems({ ITE_NEIGHBORHOOD: text })}
+          />
           <TextInput
           style={styles.input}
           placeholder="Valor"
@@ -80,6 +98,7 @@ export function UpdateItem({ navigation, route }) {
           value={items.ITE_DESCRIPTION}
           onChangeText={(text) => setItems({ ITE_DESCRIPTION: text })}
           />
+          
           <Text style={styles.registerText} > Ativar Anúncio?</Text>
          <Checkbox
           style={styles.checkbox}
