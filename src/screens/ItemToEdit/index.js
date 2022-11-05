@@ -22,60 +22,109 @@ export function ItemToEdit({ navigation, route }) {
   return(
     <KeyboardAvoidingView style={styles.background}>
       <View style={styles.container}>
-          <Text style={styles.submitText}>{items.ITE_TITLE}</Text>
-          <Text style={styles.listText}>
-            {items.ITE_TITLE} {items.ITE_DESCRIPTION} {items.ITE_PRICE} {items.ITE_CATEGORY} 
-          <Image source={{ uri: items.ITE_IMAGE }} style={styles.thumbnail} />
+        <Text 
+        style={styles.listText}
+        >
+          {items.ITE_TITLE} 
+        </Text>
+        <Image source={{ uri: items.ITE_IMAGE }} style={styles.thumbnail} />
+        <Text
+          style={styles.descriptionText}
+        >
+          {items.ITE_DESCRIPTION} 
+        </Text>
+        <Text
+          style={styles.valueText}
+        >
+          {items.ITE_PRICE} 
+        </Text>
+        <Text
+          style={styles.contactText}
+        >
+          {items.ITE_CONTACT} 
+        </Text>
+        <Text
+            style={styles.contactText}
+          >
+            {items.ITE_CITY} 
           </Text>
-
-
-          <TouchableOpacity
-            style={styles.btnSubmit}
-            onPress={ () => navigation.navigate('UpdateItem', {
-              id: items.ITE_ID })
-            }
-            >
-            <Text style={styles.submitText}>Editar</Text>
-          </TouchableOpacity>
-
+          <Text
+            style={styles.contactText}
+          >
+            {items.ITE_NEIGHBORHOOD} 
+          </Text>
+        <Text
+          style={styles.valueText}
+        >
+          {items.ITE_CATEGORY} 
+        </Text>
+        <TouchableOpacity
+          style={styles.btnSubmit}
+          onPress={ () => navigation.navigate('UpdateItem', {
+            id: items.ITE_ID })
+          }
+          >
+        <Text style={styles.submitText}>Editar</Text>
+        </TouchableOpacity>
       </View>
     </KeyboardAvoidingView>
   )
 }
 const styles = StyleSheet.create({
   background: {
+    justifyContent: 'center',
+    width: '100%',
+    height: '100%'
+  },
+  container:{
     flex: 1,
     backgroundColor: '#FFF7C0',
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  container:{
-    flex:1,
-    alignItems: 'center',
-    justifyContent: 'center',
     width: '100%',
+    height: '100%',
   },
-  picker:{
-    flex:1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    fontSize:20,
+  Scroll:{
+    flex: 1,
   },
-  logo:{
-    resizeMode: "center",
-    height: 200,
-    width: 200
+
+  listText: {
+    fontWeight: 'bold',
+    fontSize: 45,
+    color: 'rgba(106, 61, 116, 1)',
+    textAlign: 'center',
+    bottom:'1%',
+    top: '1%',
+  },
+  descriptionText: {
+    fontWeight: 'bold',
+    fontSize: 30,
+    color: 'rgba(106, 61, 116, 1)',
+    textAlign: 'center',
+    bottom:'1%',
+    top: '1%',
+  },
+  valueText: {
+    fontWeight: 'bold',
+    fontSize: 30,
+    color: 'rgba(106, 61, 116, 1)',
+    textAlign: 'center',
+  },
+  contactText: {
+    fontWeight: 'bold',
+    fontSize: 30,
+    color: 'rgba(106, 61, 116, 1)',
+    textAlign: 'center',
   },
   thumbnail: {
     width: 300,
-    height: 150,
+    height: 300,
     resizeMode: 'contain',
   },
-  
   btnSubmit:{
     backgroundColor: 'rgba(106, 61, 116, 1)',
-    width: '90%',
-    height:45,
+    width: 250,
+    height:70,
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 20,
@@ -85,24 +134,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize:20,
     color: '#FFF7C0',
+
   },
-  btnRegister:{
-    //width: '100%',
-    //height:45,
-    //backgroundColor: 'rgba(106, 61, 116, 1)',
-  },
-  registerText:{
-    fontWeight: 'bold',
-    fontSize:20,
-    color: 'rgba(106, 61, 116, 1)',
-    },
-  listText: {
-    fontWeight: 'bold',
-    fontSize:20,
-    color: 'rgba(106, 61, 116, 1)',
-    textAlign: 'center',
-  },
-    
 });
+
 
   

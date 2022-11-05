@@ -63,6 +63,7 @@ export function Register({ navigation }) {
         />
 
          <TextInput
+         secureTextEntry
         style={styles.input}
         placeholder="Senha"
         placeholderTextColor={'#FFF7C0'}

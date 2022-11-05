@@ -23,6 +23,8 @@ export function RegisterItem({ navigation }) {
     register('description')
     register('image')
     register('contact')
+    register('city')
+    register('neighborhood')
     register('category')
     register('image')
   }, [register])
@@ -46,6 +48,8 @@ export function RegisterItem({ navigation }) {
       ITE_IMAGE: image,
       ITE_CONTACT:data.contact,
       CAT_ID: selectedCategory,
+      ITE_NEIGHBORHOOD: data.neighborhood,
+      ITE_CITY: data.city
           }
     api.post('/item/create', data)
     .then(() => {
@@ -105,10 +109,23 @@ export function RegisterItem({ navigation }) {
           autoCorrect={false}
           onChangeText={text => setValue('price', text)}
           />
-
+          <TextInput
+          style={styles.input}
+          placeholder="Cidade"
+          placeholderTextColor={'#FFF7C0'}
+          autoCorrect={false}
+          onChangeText={text => setValue('city', text)}
+          />
+           <TextInput
+          style={styles.input}
+          placeholder="Bairro"
+          placeholderTextColor={'#FFF7C0'}
+          autoCorrect={false}
+          onChangeText={text => setValue('neighborhood', text)}
+          />
           <TextInput
            multiline
-           numberOfLines={4}
+           numberOfLines={3}
           style={styles.input}
           placeholder="Descrição"
           placeholderTextColor={'#FFF7C0'}
@@ -155,6 +172,7 @@ const styles = StyleSheet.create({
     width: 200
   },
   picker:{
+    width: '100%',
     fontSize:20,
   },
   text:{

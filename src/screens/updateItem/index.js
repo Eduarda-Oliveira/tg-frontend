@@ -2,11 +2,13 @@ import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, KeyboardAvoidingView, TextInput} from "react-native";
 import { useEffect, useState } from "react";
 import { useForm } from 'react-hook-form'
+import Checkbox from 'expo-checkbox';
 import api from '../../services/api';
 
 export function UpdateItem({ navigation, route }) {
   const { register, setValue, handleSubmit } = useForm()
   const [items, setItems] = useState({});
+  const [isChecked, setChecked] = useState(true);
 
   useEffect(() => {
     let params ={
@@ -18,7 +20,8 @@ export function UpdateItem({ navigation, route }) {
       console.log(error.message)
     });
   }, []);
- 
+
+  console.log(isChecked)
  const onSubmit = () => {
   let params ={
     ITE_ID: route.params.id,
@@ -26,7 +29,9 @@ export function UpdateItem({ navigation, route }) {
     ITE_PRICE: items.ITE_PRICE,
     ITE_DESCRIPTION: items.ITE_DESCRIPTION,
     ITE_CONTACT: items.ITE_CONTACT,
-    ITE_ENABLED: true
+    ITE_CITY: items.ITE_CITY,
+    ITE_NEIGHBORHOOD: items.ITE_NEIGHBORHOOD,
+    ITE_ENABLED: isChecked
         }
   console.log(params)
   api.put('/item/update', params)
@@ -59,6 +64,22 @@ export function UpdateItem({ navigation, route }) {
           value={items.ITE_CONTACT}
           onChangeText={(text) => setItems({ ITE_CONTACT: text })}
           />
+           <TextInput
+          style={styles.input}
+          placeholder="Cidade"
+          placeholderTextColor={'#FFF7C0'}
+          autoCorrect={false}
+          value={items.ITE_CITY}
+          onChangeText={(text) => setItems({ ITE_CITY: text })}
+          />
+           <TextInput
+          style={styles.input}
+          placeholder="Bairro"
+          placeholderTextColor={'#FFF7C0'}
+          autoCorrect={false}
+          value={items.ITE_NEIGHBORHOOD}
+          onChangeText={(text) => setItems({ ITE_NEIGHBORHOOD: text })}
+          />
           <TextInput
           style={styles.input}
           placeholder="Valor"
@@ -77,6 +98,15 @@ export function UpdateItem({ navigation, route }) {
           value={items.ITE_DESCRIPTION}
           onChangeText={(text) => setItems({ ITE_DESCRIPTION: text })}
           />
+          
+          <Text style={styles.registerText} > Ativar Anúncio?</Text>
+         <Checkbox
+          style={styles.checkbox}
+          value={isChecked}
+          onValueChange={setChecked}
+          color={isChecked ? 'rgba(103, 64, 119, 0.78)' : undefined}
+          
+        />
           <TouchableOpacity
             style={styles.btnSubmit}
             onPress={handleSubmit(onSubmit)}>
@@ -123,6 +153,11 @@ const styles = StyleSheet.create({
     height: 150,
     resizeMode: 'contain',
   },
+  
+  checkbox: {
+    margin: 8,
+  },
+
   btnSubmit:{
     backgroundColor: 'rgba(106, 61, 116, 1)',
     width: '50%',
@@ -148,4 +183,9 @@ const styles = StyleSheet.create({
     borderRadius:20,
     padding: 10,
   },
+  registerText:{
+    fontWeight: 'bold',
+    fontSize:20,
+    color: 'rgba(106, 61, 116, 1)',
+    },
 });

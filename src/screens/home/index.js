@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import api from '../../services/api';
 import {Picker} from '@react-native-picker/picker';
 import { useForm } from 'react-hook-form'
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export function Home({ navigation }) {
   const { register, setValue, handleSubmit } = useForm()
@@ -22,64 +23,35 @@ export function Home({ navigation }) {
     });
   }, [])
 
-  const onSubmit = () => {
-    let params ={
-      CAT_ID: selectedCategory,
-          }
-    console.log(params)
-    api.get('/item/listCategory', {params:params})
-   .then(({data}) => {
-    setItems(data.items) 
-    console.log(data)
-    })
-   .catch((error) => {
-          console.log(error.message)
-        });
-};
 
   return (
+    <SafeAreaView
+    style={{ flex: 1, backgroundColor: '#FFF7C0'}}
+  >
     <KeyboardAvoidingView style={styles.background}>
-      <ScrollView>
+
         <View style={styles.container}>
         <Image
           style={styles.logo}
           source={require("../../../assets/LOGOtg.png")}
         />  
-          <Picker
-            style={styles.picker}
-            selectedValue={selectedCategory}
-            onValueChange={(itemValue, itemIndex) =>setSelectedCategories(itemValue)} >
-            {categories.map((item, key)=>(
-              <Picker.Item label={item.CAT_NAME} value={item.CAT_ID} key={key}/>)
-              )}
-          </Picker>
-          {
-            items.map((item, index) =>{
-              return(
-                <Text 
-                  style={styles.listText}
-                  key={index}>
-                  {item.ITE_TITLE} {item.ITE_DESCRIPTION} {item.ITE_PRICE} 
-                  <Image source={{ uri: item.ITE_IMAGE }} style={styles.thumbnail} />
-                </Text>
-              )
-            })
-          }
+          
           <TouchableOpacity
-            style={styles.btnRegister}
-            onPress={handleSubmit(onSubmit)}
+            style={styles.btnAll}
+            onPress={ () => navigation.navigate('ListToEdit')}
             >
-            <Text style={styles.registerText}>Buscar</Text>
+            <Text style={styles.submitText}> Meus Anúncios</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={styles.btnSubmit}
-            onPress={ () => navigation.navigate('Anuncio', {screen: "ListItems"})}
-            >
-            <Text style={styles.submitText}>Buscar todos</Text>
-          </TouchableOpacity>
+              style={styles.btnAll}
+              onPress={ () => navigation.navigate('ListToEdit', {
+                screen: 'RegisterItem'})} 
+          >
+            <Text style={styles.submitText}> Novo Anúncio</Text>
+          </TouchableOpacity> 
         </View>
-      </ScrollView>
     </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 }
 
@@ -91,57 +63,32 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   container:{
-    flex:1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    flex: 1,
+    backgroundColor: '#FFF7C0',
     width: '100%',
-  },
-  picker:{
-    flex:1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    fontSize:20,
+    height: '100%',
   },
   logo:{
     resizeMode: "center",
-    height: 200,
-    width: 200
+    height: 400,
+    width: 400
   },
-  thumbnail: {
-    width: 300,
-    height: 150,
-    resizeMode: 'contain',
-  },
-  
-  btnSubmit:{
-    backgroundColor: 'rgba(106, 61, 116, 1)',
-    width: '90%',
-    height:45,
+  btnAll:{
+    left: '12%',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-around',
+    backgroundColor: 'rgba(106, 61, 116, 1)',
+    width: '80%',
+    height:60,
     borderRadius: 20,
-    elevation: 3,
+    marginBottom: '5%'
   },
   submitText:{
+    alignItems: 'center',
+    justifyContent: 'center',
     fontWeight: 'bold',
     fontSize:20,
     color: '#FFF7C0',
-  },
-  btnRegister:{
-    //width: '100%',
-    //height:45,
-    //backgroundColor: 'rgba(106, 61, 116, 1)',
-  },
-  registerText:{
-    fontWeight: 'bold',
-    fontSize:20,
-    color: 'rgba(106, 61, 116, 1)',
-    },
-  listText: {
-    fontWeight: 'bold',
-    fontSize:20,
-    color: 'rgba(106, 61, 116, 1)',
-    textAlign: 'center',
-  },
-    
+
+  }, 
 });

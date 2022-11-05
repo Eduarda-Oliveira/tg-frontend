@@ -1,12 +1,11 @@
 import React from 'react';
 import { StyleSheet, Text, View, KeyboardAvoidingView, TextInput, TouchableOpacity, Image} from 'react-native';
-import Icon from 'react-native-vector-icons/Feather';
 import { useEffect } from "react";
-import { useForm } from 'react-hook-form'
+import { useForm, Controller } from 'react-hook-form'
 import api from '../../services/api';
 
 export function Login({ navigation }) {
-  const { register, setValue, handleSubmit } = useForm()
+  const { control, register, setValue, handleSubmit, formState: { errors }  } = useForm()
 
   useEffect(() => {
     register('email')
@@ -34,25 +33,26 @@ export function Login({ navigation }) {
           style={styles.logo}
           source={require("../../../assets/LOGOtg.png")}
         />        
-        <Text style={styles.text}> Login </Text>
+        <Text style={styles.text}> Login </Text>    
+        
         <TextInput
-        style={styles.input}
-        placeholder="Email"
-        placeholderTextColor={'#FFF7C0'}
-        keyboardType="email-address"
-        autoCorrect={false}
-        onChangeText={text => setValue('email', text)}
-        />    
+          style={styles.input}
+          placeholder="Email"
+          placeholderTextColor={'#FFF7C0'}
+          keyboardType="email-address"
+          autoCorrect={false}
+          onChangeText={text => setValue('email', text)}
+          />
 
-        <TextInput
-        secureTextEntry
-        style={styles.input}
-        icon="lock"
-        placeholder="Senha"
-        placeholderTextColor={'#FFF7C0'}
-        autoCorrect={false}
-        onChangeText={text => setValue('password', text)}
-        />
+      <TextInput
+          secureTextEntry
+          style={styles.input}
+          icon="lock"
+          placeholder="Senha"
+          placeholderTextColor={'#FFF7C0'}
+          autoCorrect={false}
+          onChangeText={text => setValue('password', text)}
+          />
 
         <TouchableOpacity
           style={styles.btnSubmit}
